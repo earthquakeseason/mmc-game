@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dwobt7r1ywjtw"]
+
+[ext_resource type="PackedScene" uid="uid://2u4454j5rste" path="res://Scenes/sigil_drawing.tscn" id="1_m8gd5"]
+
+[node name="DrawingScreen" type="CanvasLayer" unique_id=420768995]
+
+[node name="SigilDrawing" parent="." unique_id=1566019245 instance=ExtResource("1_m8gd5")]
+
+[node name="ExplanationLabel" type="Label" parent="." unique_id=1151487123]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.5
+offset_top = 24.0
+offset_right = 57.5
+offset_bottom = 47.0
+grow_horizontal = 2
+text = "Draw your sigil"
