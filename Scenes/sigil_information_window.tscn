@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://d15q1cskdwk6s"]
+
+[ext_resource type="Script" uid="uid://dmplqn7htjhdm" path="res://Scripts/sigil_information_window.gd" id="1_rxmfq"]
+
+[node name="SigilInformationWindow" type="Window" unique_id=269254278]
+oversampling_override = 1.0
+title = "Sigil info"
+position = Vector2i(150, 174)
+size = Vector2i(300, 300)
+script = ExtResource("1_rxmfq")
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

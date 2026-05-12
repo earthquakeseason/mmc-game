@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://dwobt7r1ywjtw"]
 
 [ext_resource type="PackedScene" uid="uid://2u4454j5rste" path="res://Scenes/sigil_drawing.tscn" id="1_m8gd5"]
+[ext_resource type="Script" uid="uid://bjp5n567gvgb6" path="res://Scripts/submit_button.gd" id="2_8dlpr"]
+[ext_resource type="Script" uid="uid://c7lye40d3h3co" path="res://Scripts/sigil_information.gd" id="3_4c5vp"]
+[ext_resource type="PackedScene" uid="uid://d15q1cskdwk6s" path="res://Scenes/sigil_information_window.tscn" id="4_grh2n"]
 
 [node name="DrawingScreen" type="CanvasLayer" unique_id=420768995]
 
@@ -16,3 +19,32 @@ offset_right = 57.5
 offset_bottom = 47.0
 grow_horizontal = 2
 text = "Draw your sigil"
+
+[node name="SubmitButton" type="Button" parent="." unique_id=1481048476]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -160.0
+offset_right = 49.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Submit sigil"
+script = ExtResource("2_8dlpr")
+
+[node name="SigilInformation" type="Button" parent="." unique_id=1038468040]
+offset_left = 28.0
+offset_top = 24.0
+offset_right = 164.0
+offset_bottom = 55.0
+size_flags_horizontal = 4
+text = "Sigil information"
+script = ExtResource("3_4c5vp")
+
+[node name="SigilInformationWindow" parent="." unique_id=269254278 instance=ExtResource("4_grh2n")]
+
+[connection signal="pressed" from="SubmitButton" to="SubmitButton" method="_on_pressed"]
+[connection signal="pressed" from="SigilInformation" to="SigilInformation" method="_on_pressed"]
