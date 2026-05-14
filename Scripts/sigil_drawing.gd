@@ -1,8 +1,11 @@
 extends Sprite2D
 
+const NUM_POINTS = 64
+const FLAME_POINT_CLOUD: Array[Vector2i] = [Vector2i(165.0, 48.0), Vector2i(134.0, 67.0), Vector2i(134.0, 203.0),
+Vector2i(133.0, 104.0), Vector2i(84.0, 192.0), Vector2i(95.0, 132.0)]
 var image: Image
 var canvas_texture: ImageTexture
-var mouse_motions: Array[Vector2]
+var mouse_motions: Array[Vector2i]
 
 func _ready() -> void:
 	GameEvents.submit_pressed.connect(_on_submit_pressed)
@@ -49,9 +52,21 @@ func _input(event: InputEvent) -> void:
 			paint_texture(mouse_motion, Color.RED)
 		canvas_texture.update(image)
 
+# most inefficient code EVER, ill fix this later i promise
+# not to mention this would detect a fully black screen as perfect
 func _on_submit_pressed():
-	print("pressed")
-	
+	var accuracy: float = 0.0
+	for position in FLAME_POINT_CLOUD:
+		var closest: Vector2i
+		for motion in mouse_motions:
+			if closest == null or motion.distance_to(position) < closest.distance_to(position):
+				closest = motion
+		accuracy += 60 - closest.distance_to(position)
+	if (accuracy > 50.0):
+		print("close enough")
+	else:
+		print("ruh roh")
+
 func add_new_point(position: Vector2):
 	if mouse_motions.is_empty() or mouse_motions.back().distance_to(position) > 20:
 		mouse_motions.append(position)
