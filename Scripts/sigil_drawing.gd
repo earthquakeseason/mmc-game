@@ -6,6 +6,7 @@ Vector2i(133.0, 104.0), Vector2i(84.0, 192.0), Vector2i(95.0, 132.0)]
 var image: Image
 var canvas_texture: ImageTexture
 var mouse_motions: Array[Vector2i]
+var distances: Array[float]
 
 func _ready() -> void:
 	GameEvents.submit_pressed.connect(_on_submit_pressed)
@@ -54,18 +55,22 @@ func _input(event: InputEvent) -> void:
 
 # most inefficient code EVER, ill fix this later i promise
 # not to mention this would detect a fully black screen as perfect
+#
+# resampling logic:
+# loop through points and sum the distances between each consecutive pair.
+# divide the total length by (N - 1)
+# start at the first point. move along the segments of the drawing.
+# every interval distance travelled drop a new point. if an interval ends between two original points. use lerp to find the exact spot.
+# use acos somewhere
+
 func _on_submit_pressed():
-	var accuracy: float = 0.0
-	for position in FLAME_POINT_CLOUD:
-		var closest: Vector2i
-		for motion in mouse_motions:
-			if closest == null or motion.distance_to(position) < closest.distance_to(position):
-				closest = motion
-		accuracy += 60 - closest.distance_to(position)
-	if (accuracy > 50.0):
-		print("close enough")
-	else:
-		print("ruh roh")
+	var total_length: float
+	for i in mouse_motions.size() - 1:
+		var distance_between_dots: float = mouse_motions[i].distance_to(mouse_motions[i + 1])
+		distances.append(distance_between_dots)
+		total_length += distance_between_dots
+	
+	print(total_length)
 
 func add_new_point(position: Vector2):
 	if mouse_motions.is_empty() or mouse_motions.back().distance_to(position) > 20:

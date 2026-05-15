@@ -43,7 +43,7 @@ offset_left = -100.0
 offset_top = -57.0
 offset_right = 100.0
 offset_bottom = -30.0
-max_value = 1000.0
+max_value = 1500.0
 show_percentage = false
 
 [connection signal="timeout" from="NewKeyTimer" to="." method="_on_new_key_timer_timeout"]

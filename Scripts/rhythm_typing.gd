@@ -18,8 +18,8 @@ func _input(event) -> void:
 		# because inputeventkey triggers when keys are released and pressed
 		if not event.echo and not event.is_released():
 			if event.physical_keycode == chosen_key:
-				# later make this more exponentially increasing as time approachs 0
-				var score_gained: int = (100 - 10 * ($NewKeyTimer.time_left - 1))
+				print($NewKeyTimer.time_left)
+				var score_gained: int = 300 * (-($NewKeyTimer.time_left) * ($NewKeyTimer.time_left - 2))
 				score += score_gained
 				print(score_gained)
 				$ProgressBar.value = score
