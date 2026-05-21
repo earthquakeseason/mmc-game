@@ -2,25 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cnlq6cprllpiy" path="res://Scripts/rhythm_typing.gd" id="1_tpf68"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpf68"]
+draw_center = false
+
 [node name="RhythmTyping" type="Node2D" unique_id=2001079599]
 script = ExtResource("1_tpf68")
 
 [node name="NewKeyTimer" type="Timer" parent="." unique_id=1365243089]
 one_shot = true
-
-[node name="PressLabel" type="Label" parent="." unique_id=2147142520]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
 
 [node name="TimeLabel" type="Label" parent="." unique_id=1358735820]
 anchors_preset = 8
@@ -45,5 +34,33 @@ offset_right = 100.0
 offset_bottom = -30.0
 max_value = 1500.0
 show_percentage = false
+
+[node name="InstructionLabel" type="Label" parent="." unique_id=683889864]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = -93.0
+offset_right = 20.0
+offset_bottom = -70.0
+grow_horizontal = 2
+text = "Press keys on time to cut"
+
+[node name="ButtonContainer" type="PanelContainer" parent="." unique_id=1150831660]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tpf68")
+
+[node name="PressContainer" type="PanelContainer" parent="ButtonContainer" unique_id=75098745]
+layout_mode = 2
+
+[node name="PressLabel" type="Label" parent="ButtonContainer/PressContainer" unique_id=2147142520]
+layout_mode = 2
+horizontal_alignment = 1
 
 [connection signal="timeout" from="NewKeyTimer" to="." method="_on_new_key_timer_timeout"]

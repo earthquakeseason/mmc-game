@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var press_label: Label = $ButtonContainer/PressContainer/PressLabel
+
 var physical_keycode_options: Array[int] = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
 var chosen_key: int
 var score: int = 0
@@ -10,7 +12,7 @@ func _ready() -> void:
 	get_new_key()
 	$ProgressBar.value = score
 
-func _process(_delta: float) -> void:
+func _process(_delta: float) -> void: 
 	$TimeLabel.text = "Press in:" + str(round_to_dec($NewKeyTimer.time_left - 1, 1)) + "s"
 
 func _input(event) -> void:
@@ -23,10 +25,8 @@ func _input(event) -> void:
 				score += score_gained
 				print(score_gained)
 				$ProgressBar.value = score
-				if $ProgressBar.value < $ProgressBar.max_value:
-					get_new_key()
-				else:
-					get_tree().change_scene_to_file("res://Scenes/victory_screen.tscn")
+				if $ProgressBar.value < $ProgressBar.max_value: get_new_key()
+				else: get_tree().change_scene_to_file("res://Scenes/victory_screen.tscn")
 			else:
 				print("pressed wrong key: " + OS.get_keycode_string(event.physical_keycode))
 				key_fail()
@@ -37,7 +37,7 @@ func _on_new_key_timer_timeout() -> void:
 
 func get_new_key() -> void:
 	chosen_key = physical_keycode_options.pick_random()
-	$PressLabel.text = OS.get_keycode_string(chosen_key)
+	press_label.text = OS.get_keycode_string(chosen_key)
 	$NewKeyTimer.start(3)
 
 func key_fail() -> void:
@@ -48,5 +48,4 @@ func key_fail() -> void:
 	$ProgressBar.value = score
 	get_new_key()
 
-func round_to_dec(num, digit: int):
-	return round(num * pow(10.0, digit)) / pow(10.0, digit)
+func round_to_dec(num, digit: int): return round(num * pow(10.0, digit)) / pow(10.0, digit)
