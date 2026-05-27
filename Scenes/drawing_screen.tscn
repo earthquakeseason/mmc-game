@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dwobt7r1ywjtw"]
 
+[ext_resource type="Script" uid="uid://bmow68ajfphe" path="res://Scripts/drawing_screen.gd" id="1_dwt7t"]
 [ext_resource type="PackedScene" uid="uid://2u4454j5rste" path="res://Scenes/sigil_drawing.tscn" id="1_m8gd5"]
 [ext_resource type="Script" uid="uid://bjp5n567gvgb6" path="res://Scripts/submit_button.gd" id="2_8dlpr"]
 [ext_resource type="Script" uid="uid://c4vt40fu68d48" path="res://Scripts/explanation_label.gd" id="2_bvc6m"]
@@ -7,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d15q1cskdwk6s" path="res://Scenes/sigil_information_window.tscn" id="4_grh2n"]
 
 [node name="DrawingScreen" type="CanvasLayer" unique_id=420768995]
+script = ExtResource("1_dwt7t")
 
 [node name="SigilDrawing" parent="." unique_id=1566019245 instance=ExtResource("1_m8gd5")]
 
@@ -61,5 +63,21 @@ script = ExtResource("3_4c5vp")
 
 [node name="SigilInformationWindow" parent="." unique_id=269254278 instance=ExtResource("4_grh2n")]
 
+[node name="TimeLabel" type="Label" parent="." unique_id=1685373798]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -164.0
+offset_right = -23.0
+offset_bottom = 23.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+text = "Time left to draw: 2.0s"
+horizontal_alignment = 1
+
+[node name="SigilTimer" type="Timer" parent="." unique_id=2092237110]
+one_shot = true
+
 [connection signal="pressed" from="SubmitButton" to="SubmitButton" method="_on_pressed"]
 [connection signal="pressed" from="SigilInformation" to="SigilInformation" method="_on_pressed"]
+[connection signal="timeout" from="SigilTimer" to="." method="_on_sigil_timer_timeout"]

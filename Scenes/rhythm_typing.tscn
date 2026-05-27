@@ -43,7 +43,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_jxie8"]
 resource_name = "press_border_shrink"
-length = 3.1
+length = 2.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,7 +99,8 @@ offset_top = -93.0
 offset_right = 20.0
 offset_bottom = -70.0
 grow_horizontal = 2
-text = "Press before the border closes"
+text = "Press the button before the red square closes to cut."
+horizontal_alignment = 1
 
 [node name="ButtonContainer" type="Control" parent="." unique_id=525630830]
 layout_mode = 3

@@ -11,7 +11,7 @@ var score: int = 0
 
 func _ready() -> void:
 	position = get_viewport().get_visible_rect().size / 2
-	$NewKeyTimer.start(4)
+	$NewKeyTimer.start(2.1)
 	get_new_key()
 	$ProgressBar.value = score
 
@@ -40,16 +40,13 @@ func score_gain(time_left: float) -> int:
 	var result_label = PRESS_RESULT_LABEL.instantiate()
 	add_child(result_label)
 
-	if (time_left <= 0.5):
-		result_label.show_result("Miss")
-		return -50
-	elif time_left > 0.5 && time_left <= 0.9:
-		result_label.show_result("Miss")
-		return -10
+	if time_left > 0.5 && time_left <= 0.9:
+		result_label.show_result("Close")
+		return 10
 	elif time_left > 0.9 && time_left <= 1.1:
 		result_label.show_result("Fine")
 		return 100
-	elif time_left > 1.1 && time_left <= 2.5:
+	elif time_left > 1.1 && time_left <= 1.65:
 		result_label.show_result("Good")
 		return 150
 	else:
@@ -59,16 +56,21 @@ func score_gain(time_left: float) -> int:
 func get_new_key() -> void:
 	chosen_key = physical_keycode_options.pick_random()
 	press_label.text = OS.get_keycode_string(chosen_key)
-	$NewKeyTimer.start(3)
+	$NewKeyTimer.start(2.1)
 	closing_animation_player.stop()
 	closing_animation_player.play("press_border_shrink")
 	
 func key_fail() -> void:
-	print("key fail triggered")
-	score -= 200
+	var result_label = PRESS_RESULT_LABEL.instantiate()
+	add_child(result_label)
+	result_label.show_result("Miss")
+	
+	score -= 150
 	if score <= 0:
 		queue_free()
-	$ProgressBar.value = score
-	get_new_key()
+		get_tree().change_scene_to_file("res://Scenes/lose_screen.tscn")
+	else:
+		$ProgressBar.value = score
+		get_new_key()
 
 func round_to_dec(num, digit: int): return round(num * pow(10.0, digit)) / pow(10.0, digit)
