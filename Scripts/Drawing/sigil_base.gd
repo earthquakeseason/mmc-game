@@ -1,4 +1,3 @@
-# to be fixed...
 class_name Sigil
 extends Resource
 

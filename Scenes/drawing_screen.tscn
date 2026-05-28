@@ -1,14 +1,11 @@
 [gd_scene format=3 uid="uid://dwobt7r1ywjtw"]
 
-[ext_resource type="Script" uid="uid://bmow68ajfphe" path="res://Scripts/Drawing/drawing_screen.gd" id="1_dwt7t"]
 [ext_resource type="PackedScene" uid="uid://2u4454j5rste" path="res://Scenes/sigil_drawing.tscn" id="1_m8gd5"]
 [ext_resource type="Script" uid="uid://bjp5n567gvgb6" path="res://Scripts/Drawing/submit_button.gd" id="2_8dlpr"]
 [ext_resource type="Script" uid="uid://c4vt40fu68d48" path="res://Scripts/Drawing/explanation_label.gd" id="2_bvc6m"]
-[ext_resource type="Script" uid="uid://c7lye40d3h3co" path="res://Scripts/Drawing/sigil_information.gd" id="3_4c5vp"]
-[ext_resource type="PackedScene" uid="uid://d15q1cskdwk6s" path="res://Scenes/sigil_information_window.tscn" id="4_grh2n"]
+[ext_resource type="Texture2D" uid="uid://cvhcnpsndm6o5" path="res://Assets/Sigils/fire.png" id="5_bvc6m"]
 
 [node name="DrawingScreen" type="CanvasLayer" unique_id=420768995]
-script = ExtResource("1_dwt7t")
 
 [node name="SigilDrawing" parent="." unique_id=1566019245 instance=ExtResource("1_m8gd5")]
 
@@ -26,15 +23,11 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ExplanationLabel" type="Label" parent="." unique_id=1151487123]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -57.5
-offset_top = 24.0
-offset_right = 57.5
-offset_bottom = 47.0
-grow_horizontal = 2
-text = "Draw your sigil"
+offset_left = 136.0
+offset_top = 168.0
+offset_right = 251.0
+offset_bottom = 191.0
+text = "Copy this sigil:"
 script = ExtResource("2_bvc6m")
 
 [node name="SubmitButton" type="Button" parent="." unique_id=1481048476]
@@ -49,35 +42,14 @@ offset_right = 49.0
 offset_bottom = -129.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Submit sigil"
+text = "Submit"
 script = ExtResource("2_8dlpr")
 
-[node name="SigilInformation" type="Button" parent="." unique_id=1038468040]
-offset_left = 28.0
-offset_top = 24.0
-offset_right = 164.0
-offset_bottom = 55.0
-size_flags_horizontal = 4
-text = "Sigil information"
-script = ExtResource("3_4c5vp")
-
-[node name="SigilInformationWindow" parent="." unique_id=269254278 instance=ExtResource("4_grh2n")]
-
-[node name="TimeLabel" type="Label" parent="." unique_id=1685373798]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -164.0
-offset_right = -23.0
-offset_bottom = 23.0
-grow_horizontal = 0
-size_flags_horizontal = 8
-text = "Time left to draw: 2.0s"
-horizontal_alignment = 1
-
-[node name="SigilTimer" type="Timer" parent="." unique_id=2092237110]
-one_shot = true
+[node name="SigilTextureRect" type="TextureRect" parent="." unique_id=1586368152]
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 314.0
+offset_bottom = 442.0
+texture = ExtResource("5_bvc6m")
 
 [connection signal="pressed" from="SubmitButton" to="SubmitButton" method="_on_pressed"]
-[connection signal="pressed" from="SigilInformation" to="SigilInformation" method="_on_pressed"]
-[connection signal="timeout" from="SigilTimer" to="." method="_on_sigil_timer_timeout"]

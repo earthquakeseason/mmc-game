@@ -1,7 +1,6 @@
 extends Node
 
 var flame_sigil: Sigil = Sigil.new()
-
 var all_sigils: Array[Sigil] = [flame_sigil]
 
 func _ready() -> void:
