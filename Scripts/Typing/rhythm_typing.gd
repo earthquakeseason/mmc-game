@@ -27,7 +27,7 @@ func _input(event) -> void:
 				print(score_gained)
 				$ProgressBar.value = score
 				if $ProgressBar.value < $ProgressBar.max_value: get_new_key()
-				else: get_tree().change_scene_to_file("res://Scenes/victory_screen.tscn")
+				else: GameEvents.emit_minigame_complete_attempt(true)
 			else:
 				print("pressed wrong key: " + OS.get_keycode_string(event.physical_keycode))
 				key_fail()

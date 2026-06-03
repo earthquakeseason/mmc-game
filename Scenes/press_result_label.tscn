@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d6870ntks1ks"]
 
-[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://Scripts/press_result_label.gd" id="1_b08gf"]
+[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://Scripts/Typing/press_result_label.gd" id="1_b08gf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tpf68"]
 font_color = Color(1, 1, 1, 0)

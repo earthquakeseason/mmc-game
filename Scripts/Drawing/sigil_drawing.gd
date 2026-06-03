@@ -28,9 +28,9 @@ func paint_texture(pos: Vector2i, paint_color: Color) -> void:
 	image.fill_rect(Rect2i(pos, Vector2i(1,1)).grow(3), paint_color)
 
 func _input(event: InputEvent) -> void:
-	var local_pos = to_local(event.position)
-	if !get_rect().has_point(local_pos): return
 	if Input.is_action_just_pressed("left_click"):
+		var local_pos = to_local(event.position)
+		if !get_rect().has_point(local_pos): return
 		image.fill(Color.WHITE)
 		gesture_points.clear()
 		var pos = to_local(event.position)
@@ -53,8 +53,8 @@ func _input(event: InputEvent) -> void:
 					gesture_points.append(impos)
 
 func _on_submit_pressed() -> void:
-	if recognizable(): GameEvents.emit_recognition_attempt(true)
-	else: GameEvents.emit_recognition_attempt(false)
+	if recognizable(): GameEvents.emit_minigame_complete_attempt(true)
+	else: GameEvents.emit_minigame_complete_attempt(false)
 
 func recognizable() -> bool:
 	if gesture_points.size() < 2: return false
