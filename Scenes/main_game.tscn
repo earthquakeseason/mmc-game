@@ -22,3 +22,14 @@ offset_top = 2.0
 offset_right = 75.0
 offset_bottom = 25.0
 text = "Time left:"
+
+[node name="NextUpContainer" type="PanelContainer" parent="." unique_id=1100550112]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NextUpContainer" unique_id=1050507193]
+layout_mode = 2

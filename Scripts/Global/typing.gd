@@ -7,4 +7,3 @@ var all_typing_scenes: Array[Typing] = [cutting]
 
 func _ready() -> void:
 	cutting.scene = TYPING_SCREEN
-	cutting.minigame_type = cutting.MinigameType.TYPING

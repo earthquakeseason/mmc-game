@@ -12,5 +12,6 @@ func _ready() -> void:
 	flame_sigil.match_threshold = 55.0
 	flame_sigil.icon = FIRE
 	
-	frost_sigil.match_threshold = 55.0
+	frost_sigil.point_cloud = [Vector2(125.9514, -0.000015), Vector2(106.0591, 8.702545), Vector2(85.98946, 20.46722), Vector2(60.6573, 34.06866), Vector2(40.2567, 44.80083), Vector2(16.44083, 57.60953), Vector2(-6.85022, 72.14488), Vector2(-28.7266, 85.1311), Vector2(-54.46312, 99.42308), Vector2(-72.44944, 112.0595), Vector2(-91.43367, 119.3556), Vector2(-84.12502, 103.0986), Vector2(-75.34995, 82.95413), Vector2(-70.18944, 63.6189), Vector2(-59.05615, 41.46761), Vector2(-51.35269, 19.00475), Vector2(-43.92113, -0.340088), Vector2(-36.54868, -21.30882), Vector2(-27.64557, -44.01826), Vector2(-21.08634, -66.63531), Vector2(-12.95332, -87.2072), Vector2(-3.860161, -111.1728), Vector2(4.198875, -130.6444), Vector2(18.97289, -113.5176), Vector2(38.35223, -87.18414), Vector2(47.25667, -72.66975), Vector2(67.98213, -49.9721), Vector2(42.78552, -60.42206), Vector2(18.37187, -61.29617), Vector2(14.12227, -43.08735), Vector2(21.31317, -19.7877), Vector2(31.30126, 5.356155)]
+	frost_sigil.match_threshold = 45.0
 	frost_sigil.icon = FROST

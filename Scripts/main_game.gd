@@ -1,6 +1,9 @@
 extends CanvasLayer
 
 const DRAWING_SCREEN: PackedScene = preload("uid://dwobt7r1ywjtw")
+const DRAWING = preload("uid://bil0asoipqfqw")
+const KNIFE = preload("uid://vwiwro34v66g")
+
 const MAX_TIME: int = 60
 
 var drawing_scene: Node
@@ -10,8 +13,17 @@ func _ready() -> void:
 	GameEvents.complete_attempt.connect(_on_complete_attempt)
 	$RoundTimer.start(MAX_TIME)
 	start_turn()
+	for minigame in GameInfo.current_round_details.minigame_requirements:
+		var next_up_symbol = TextureRect.new()
+		if (minigame.minigame_type == Minigame.MinigameType.TYPING):
+			print("typing")
+			next_up_symbol.texture = KNIFE
+		else:
+			print("drawing")
+			next_up_symbol.texture = DRAWING
+		$NextUpContainer/HBoxContainer.add_child(next_up_symbol)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$RoundTimeProgress.value = 100 * ($RoundTimer.time_left / MAX_TIME)
 
 func _on_complete_attempt(successful: bool) -> void:

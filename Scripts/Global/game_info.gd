@@ -9,8 +9,8 @@ func set_base_info() -> void:
 	current_round_turn = 0
 	round_num = 0
 	current_round_details = Round.new()
-	current_round_details.minigame_requirements.append(Sigils.flame_sigil)
-	current_round_details.minigame_requirements.append(TypingOptions.cutting)
+	current_round_details.minigame_requirements.append(Sigils.all_sigils.pick_random())
+	current_round_details.minigame_requirements.append(TypingOptions.all_typing_scenes.pick_random())
 
 func increment_turn() -> void:
 	current_round_details.completed_minigames.append(current_round_details.minigame_requirements[current_round_turn])
