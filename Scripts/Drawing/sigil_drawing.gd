@@ -60,7 +60,7 @@ func recognizable() -> bool:
 	if gesture_points.size() < 2: return false
 	var normalised_drawing: Array[Vector2] = normalize_points(gesture_points)
 	var distance_forward: float = calculate_path_distance(normalised_drawing, normalised_template)
-	var distance_reverse: float = calculate_path_distance(normalised_drawing, normalised_template)
+	var distance_reverse: float = calculate_path_distance(normalised_drawing, normalised_template_reverse)
 	var best_distance: float = min(distance_forward, distance_reverse)
 
 	print(best_distance)
