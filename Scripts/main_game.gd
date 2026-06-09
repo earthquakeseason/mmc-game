@@ -3,6 +3,7 @@ extends CanvasLayer
 const DRAWING_SCREEN: PackedScene = preload("uid://dwobt7r1ywjtw")
 const DRAWING = preload("uid://bil0asoipqfqw")
 const KNIFE = preload("uid://vwiwro34v66g")
+const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
 
 const MAX_TIME: int = 60
 
@@ -36,12 +37,17 @@ func _on_complete_attempt(successful: bool) -> void:
 
 func start_turn() -> void:
 	var minigame_requirement_current: Minigame = GameInfo.get_current_minigame()
+	var countdown_text_instance = COUNTDOWN_TEXT.instantiate()
 	if minigame_requirement_current.minigame_type == Minigame.MinigameType.TYPING:
 		typing_scene = minigame_requirement_current.scene.instantiate()
 		add_child(typing_scene)
+		countdown_text_instance.start_animation("Type!")
+		add_child(countdown_text_instance)
 	else:
 		drawing_scene = DRAWING_SCREEN.instantiate()
 		add_child(drawing_scene)
+		countdown_text_instance.start_animation("Draw!")
+		add_child(countdown_text_instance)
 
 func next_turn() -> void:
 	GameInfo.increment_turn()

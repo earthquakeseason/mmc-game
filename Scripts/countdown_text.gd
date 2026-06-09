@@ -1,14 +1,9 @@
 extends Control
 
-const TIME_DISPLAYED: float = 4
-const TRUE_TIME: float = 2
+func start_animation(countdown_text: String) -> void:
+	$CountdownLabel.text = countdown_text
+	$AnimationPlayer.play("text_spawn_animation")
 
-func _ready() -> void:
-	$CountdownTimer.start(TRUE_TIME)
-	print(TRUE_TIME / TIME_DISPLAYED)
-
-func _process(delta: float) -> void:
-	if $CountdownTimer.time_left > TRUE_TIME / TIME_DISPLAYED:
-		$CountdownLabel.text = str((int)(TIME_DISPLAYED * (TIME_DISPLAYED / $CountdownTimer.time_left) + 1))
-	else:
-		$CountdownLabel.text = "Go!"
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "text_spawn_animation":
+		queue_free()

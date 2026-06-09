@@ -34,7 +34,6 @@ func generate_round() -> void:
 	for i in range(available_minigame_options.size()):
 		if not available_minigame_options[i].acceptable_next.is_empty():
 			current_round_details.minigame_requirements.append(available_minigame_options[i])
-			print(current_round_details.minigame_requirements.back().minigame_name)
 			break
 	while 0 == 0:
 		if not current_round_details.minigame_requirements.back().acceptable_next.is_empty():
@@ -47,7 +46,6 @@ func generate_round() -> void:
 					current_round_details.minigame_requirements.append(current_round_details.minigame_requirements.back().acceptable_next[i])
 					break
 			if not found:
-				print("not found")
 				return
 		else:
 			return
