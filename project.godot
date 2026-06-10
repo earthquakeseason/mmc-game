@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="mmc-potion-game"
-run/main_scene="uid://xgc8ni3lm0pr"
+run/main_scene="uid://bss7jasiy8kja"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,8 @@ config/icon="res://icon.svg"
 
 GameEvents="*uid://c06d8i6j4sihb"
 Sigils="*uid://bxt5kqh673hh4"
+Ingredients="*uid://c0iwymxdofyfw"
+Potions="*uid://t2gf5f42n3hq"
 TypingOptions="*uid://cso43e8jpi41y"
 GameInfo="*uid://ci8qc8mpnmd14"
 

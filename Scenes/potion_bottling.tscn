@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c47r5qe8xe2ah"]
 
 [ext_resource type="Texture2D" uid="uid://d0hk7ct3sqmh4" path="res://icon.svg" id="1_brvvn"]
-[ext_resource type="Script" uid="uid://dnw0o0r5yil2i" path="res://Scripts/potion_bottling.gd" id="1_yl3ja"]
+[ext_resource type="Script" uid="uid://dnw0o0r5yil2i" path="res://scripts/potions/potion_bottling.gd" id="1_yl3ja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ja"]
 size = Vector2(120, 120)

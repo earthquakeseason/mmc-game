@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckwm41vrcfro8"]
 
-[ext_resource type="Script" uid="uid://cprlfaecmksnh" path="res://Scripts/try_again_button.gd" id="1_s2rrh"]
+[ext_resource type="Script" uid="uid://cprlfaecmksnh" path="res://scripts/try_again_button.gd" id="1_s2rrh"]
 
 [node name="MainGame" type="CanvasLayer" unique_id=603355536]
 

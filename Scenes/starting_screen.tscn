@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bss7jasiy8kja"]
 
-[ext_resource type="Script" uid="uid://c47vih6hekmqu" path="res://Scripts/MainMenu/start_button.gd" id="1_8tbkh"]
+[ext_resource type="Script" uid="uid://c47vih6hekmqu" path="res://scripts/main_menu/start_button.gd" id="1_lbefa"]
 
 [node name="StartingScreen" type="CanvasLayer" unique_id=1588621525]
 
@@ -29,4 +29,6 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
-script = ExtResource("1_8tbkh")
+script = ExtResource("1_lbefa")
+
+[connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]

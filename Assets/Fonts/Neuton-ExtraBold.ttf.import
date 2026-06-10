@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cx03xwpxh2tyi"
-path="res://.godot/imported/Neuton-ExtraBold.ttf-ac6b20411da4bb3edcbdf31d961930f9.fontdata"
+path="res://.godot/imported/Neuton-ExtraBold.ttf-6d024e46b53c9d465868fdd7e92e5956.fontdata"
 
 [deps]
 
-source_file="res://Assets/Fonts/Neuton-ExtraBold.ttf"
-dest_files=["res://.godot/imported/Neuton-ExtraBold.ttf-ac6b20411da4bb3edcbdf31d961930f9.fontdata"]
+source_file="res://assets/fonts/Neuton-ExtraBold.ttf"
+dest_files=["res://.godot/imported/Neuton-ExtraBold.ttf-6d024e46b53c9d465868fdd7e92e5956.fontdata"]
 
 [params]
 

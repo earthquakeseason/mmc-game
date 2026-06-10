@@ -11,6 +11,7 @@ func set_base_info() -> void:
 	current_round_turn = 0
 	round_num = 0
 	current_round_details = Round.new()
+	demand = 10
 	generate_round()
 
 func increment_turn() -> void:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d6870ntks1ks"]
 
-[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://Scripts/Typing/press_result_label.gd" id="1_b08gf"]
+[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://scripts/typing/press_result_label.gd" id="1_x5o6f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tpf68"]
 
@@ -47,7 +47,7 @@ offset_bottom = 23.0
 text = "HI"
 label_settings = SubResource("LabelSettings_tpf68")
 horizontal_alignment = 1
-script = ExtResource("1_b08gf")
+script = ExtResource("1_x5o6f")
 
 [node name="ResultAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1051495020]
 libraries/ = SubResource("AnimationLibrary_0ovia")

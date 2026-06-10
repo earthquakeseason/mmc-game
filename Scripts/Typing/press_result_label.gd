@@ -1,14 +1,14 @@
 extends Label
 
 func _ready() -> void:
-	var start_pos = position
-	var x_offset = randf_range(-50.0, 20.0)
+	var start_pos: Vector2 = position
+	var x_offset: float = randf_range(-50.0, 20.0)
 	
 	start_pos.x += x_offset
 	position = start_pos
 	
-	var target_pos = start_pos + Vector2(0, -20)
-	var tween = create_tween()
+	var target_pos: Vector2 = start_pos + Vector2(0, -20)
+	var tween: Tween = create_tween()
 	tween.tween_property(self, "position", target_pos, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func show_result(result_text: String) -> void:

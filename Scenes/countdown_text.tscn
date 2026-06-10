@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c762pif0pw7e5"]
 
-[ext_resource type="Script" uid="uid://2sg6k0kknhyd" path="res://Scripts/countdown_text.gd" id="1_412jk"]
-[ext_resource type="FontFile" uid="uid://cx03xwpxh2tyi" path="res://Assets/Fonts/Neuton-ExtraBold.ttf" id="1_i20jf"]
+[ext_resource type="Script" uid="uid://2sg6k0kknhyd" path="res://scripts/countdown_text.gd" id="1_beg7k"]
+[ext_resource type="FontFile" uid="uid://cx03xwpxh2tyi" path="res://assets/fonts/Neuton-ExtraBold.ttf" id="2_ix4o4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_412jk"]
-font = ExtResource("1_i20jf")
+font = ExtResource("2_ix4o4")
 font_size = 64
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
@@ -77,7 +77,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("CountdownLabel:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -102,7 +102,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_412jk")
+script = ExtResource("1_beg7k")
 
 [node name="CountdownLabel" type="Label" parent="." unique_id=1437102199]
 self_modulate = Color(1, 1, 1, 0)

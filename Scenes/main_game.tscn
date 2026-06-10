@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://xgc8ni3lm0pr"]
 
-[ext_resource type="Script" uid="uid://du1y3ej46on4x" path="res://Scripts/main_game.gd" id="1_l756w"]
+[ext_resource type="Script" uid="uid://du1y3ej46on4x" path="res://scripts/main_game.gd" id="1_s3esy"]
 
 [node name="MainGame" type="CanvasLayer" unique_id=603355536]
-script = ExtResource("1_l756w")
+script = ExtResource("1_s3esy")
 
 [node name="RoundTimer" type="Timer" parent="." unique_id=1742549707]
 

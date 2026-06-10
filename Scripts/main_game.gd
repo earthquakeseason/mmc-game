@@ -4,13 +4,14 @@ const DRAWING_SCREEN: PackedScene = preload("uid://dwobt7r1ywjtw")
 const DRAWING = preload("uid://bil0asoipqfqw")
 const KNIFE = preload("uid://vwiwro34v66g")
 const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
-
 const MAX_TIME: int = 60
 
 var drawing_scene: Node
 var typing_scene: Node
+@onready var demand_label: RichTextLabel = $GameDetailsContainer/VBoxContainer/DemandLabel
 
 func _ready() -> void:
+	demand_label.text = "Demand: " + str(GameInfo.demand) + "%"
 	GameEvents.complete_attempt.connect(_on_complete_attempt)
 	$RoundTimer.start(MAX_TIME)
 	start_turn()

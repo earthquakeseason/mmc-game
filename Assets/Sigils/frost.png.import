@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8badmp1twug3"
-path="res://.godot/imported/frost.png-b19b2057d39d611aa4c4ebbfdf5754ed.ctex"
+path="res://.godot/imported/frost.png-c4d67a45c41c20ed9adda9fc6cd66d4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sigils/frost.png"
-dest_files=["res://.godot/imported/frost.png-b19b2057d39d611aa4c4ebbfdf5754ed.ctex"]
+source_file="res://assets/sigils/frost.png"
+dest_files=["res://.godot/imported/frost.png-c4d67a45c41c20ed9adda9fc6cd66d4b.ctex"]
 
 [params]
 
