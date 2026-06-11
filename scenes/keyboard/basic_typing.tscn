@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dau3dw7ynlxf4"]
 
-[ext_resource type="Script" uid="uid://cnlq6cprllpiy" path="res://scripts/keyboard/cutting.gd" id="1_tpf68"]
+[ext_resource type="Script" uid="uid://cnlq6cprllpiy" path="res://scripts/keyboard/cutting.gd" id="1_t0b7i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpf68"]
 draw_center = false
@@ -75,8 +75,8 @@ _data = {
 &"press_border_shrink": SubResource("Animation_jxie8")
 }
 
-[node name="Cutting" type="Node2D" unique_id=2001079599]
-script = ExtResource("1_tpf68")
+[node name="BasicTyping" type="Node2D" unique_id=2001079599]
+script = ExtResource("1_t0b7i")
 
 [node name="NewKeyTimer" type="Timer" parent="." unique_id=1365243089]
 one_shot = true
