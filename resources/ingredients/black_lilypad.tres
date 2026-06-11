@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_khq5k")
 name = "Black Lilypad"
-preperation_type = 3
+primary_preperation_type = 2
+secondary_prepration_type = 1
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

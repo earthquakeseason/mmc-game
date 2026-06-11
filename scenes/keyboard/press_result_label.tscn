@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d6870ntks1ks"]
 
-[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://scripts/typing/press_result_label.gd" id="1_x5o6f"]
+[ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://scripts/keyboard/press_result_label.gd" id="1_x5o6f"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tpf68"]
 

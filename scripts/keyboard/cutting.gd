@@ -6,7 +6,6 @@ extends Node2D
 const PRESS_RESULT_LABEL = preload("uid://d6870ntks1ks")
 const BASE_ANIMATION_SPEED: float = 2.1
 
-var physical_keycode_options: Array[int] = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
 var chosen_key: int
 var score: int = 0
 var key_time: float = 2.1 / GameInfo.game_speed
@@ -53,7 +52,7 @@ func score_gain(time_left: float) -> int:
 		return 300
 
 func get_new_key() -> void:
-	chosen_key = physical_keycode_options.pick_random()
+	chosen_key = GameInfo.PHYSICAL_KEYCODE_OPTIONS.pick_random()
 	press_label.text = OS.get_keycode_string(chosen_key)
 	if first_key:
 		first_key = false
