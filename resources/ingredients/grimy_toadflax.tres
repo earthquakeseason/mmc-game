@@ -1,10 +1,11 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://c2bktlhysou2t"]
 
 [ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="1_71bae"]
+[ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_acqma"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_ohkbg"]
 
 [resource]
 script = ExtResource("1_ohkbg")
 name = "Grimy Toadflax"
-primary_preperation_minigame = ExtResource("1_71bae")
+preperation_minigames = Array[ExtResource("1_acqma")]([ExtResource("1_71bae")])
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

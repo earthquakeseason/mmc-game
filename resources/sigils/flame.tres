@@ -5,7 +5,6 @@
 
 [resource]
 script = ExtResource("1_bvgn3")
-match_threshold = null
 icon = ExtResource("1_5omyp")
 minigame_type = 1
 minigame_name = "flame"

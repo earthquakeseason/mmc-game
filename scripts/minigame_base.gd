@@ -1,5 +1,7 @@
 class_name Minigame
 extends Resource
 
-@export_enum("TYPING", "DRAWING") var minigame_type
+enum MinigameTypes {TYPING, DRAWING}
+
+@export var minigame_type: MinigameTypes
 @export var minigame_name: String

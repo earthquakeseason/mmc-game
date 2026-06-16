@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://c8ktxlr7q31c8"]
 
 [ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="1_bssex"]
+[ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_tbous"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_yxgop"]
 [ext_resource type="Resource" uid="uid://babiiayer8jn5" path="res://resources/mechanical/crushing.tres" id="3_tbous"]
 
 [resource]
 script = ExtResource("1_yxgop")
 name = "Limpwurt Root"
-primary_preperation_minigame = ExtResource("1_bssex")
-secondary_prepration_minigame = ExtResource("3_tbous")
+preperation_minigames = Array[ExtResource("1_tbous")]([ExtResource("1_bssex"), ExtResource("3_tbous")])
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"
