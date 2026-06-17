@@ -8,7 +8,7 @@ const BASE_ANIMATION_SPEED: float = 2.1
 
 var chosen_key: int
 var score: int = 0
-var key_time: float = 2.1 / GameInfo.game_speed
+var key_time: float = 2.1 / GameInfo.demand
 var first_key: bool = false
 
 func _ready() -> void:

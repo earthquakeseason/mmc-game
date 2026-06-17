@@ -9,4 +9,5 @@
 script = ExtResource("2_1axdk")
 name = "Potion of Strength"
 ingredients = Array[ExtResource("1_3yaaq")]([ExtResource("2_xvvsr"), ExtResource("3_kxs3w")])
+potion_time_modification = 1.2
 metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

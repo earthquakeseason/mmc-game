@@ -6,28 +6,20 @@ const KNIFE = preload("uid://vwiwro34v66g")
 const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
 const MAX_TIME: int = 60
 
+var round_time: float
 var drawing_scene: Node
 var typing_scene: Node
+var selected_potion: Potion
 @onready var demand_label: RichTextLabel = $GameDetailsContainer/VBoxContainer/DemandLabel
 @onready var potion_label: Label = $GameDetailsContainer/VBoxContainer/PotionLabel
 
 func _ready() -> void:
-	demand_label.text = "Demand: " + str(GameInfo.demand) + "%"
 	GameEvents.complete_attempt.connect(_on_complete_attempt)
-	$RoundTimer.start(MAX_TIME)
+	start_round()
 	start_turn()
-	potion_label.text = GameInfo.current_round_details.selected_potion.name
-	for ingredient: Ingredient in GameInfo.current_round_details.selected_potion.ingredients:
-		for minigame: Minigame in ingredient.preperation_minigames:
-			var next_up_symbol = TextureRect.new()
-			if (minigame.minigame_type == Minigame.MinigameTypes.TYPING):
-				next_up_symbol.texture = KNIFE
-			else:
-				next_up_symbol.texture = DRAWING
-			$NextUpContainer/HBoxContainer.add_child(next_up_symbol)
 
 func _process(_delta: float) -> void:
-	$RoundTimeProgress.value = 100 * ($RoundTimer.time_left / MAX_TIME)
+	$RoundTimeProgress.value = 100 * ($RoundTimer.time_left / round_time)
 
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
@@ -37,9 +29,9 @@ func _on_complete_attempt(successful: bool) -> void:
 			drawing_scene.queue_free()
 		GameInfo.increment_turn()
 		if GameInfo.round_over:
-			get_tree().change_scene_to_file("res://Scenes/victory_screen.tscn")
-		else:
-			start_turn()
+			GameInfo.increment_round()
+			start_round()
+		start_turn()
 
 func start_turn() -> void:
 	var minigame_requirement_current: Minigame = GameInfo.get_current_minigame()
@@ -54,3 +46,25 @@ func start_turn() -> void:
 		add_child(drawing_scene)
 		countdown_text_instance.start_animation("Draw!")
 		add_child(countdown_text_instance)
+
+func start_round() -> void:
+	if GameInfo.round_num > 0:
+		# perhaps add a little animation for how well they did creating the potion
+		pass
+
+	demand_label.text = "Demand: " + str(int((GameInfo.demand - 1) * 100)) + "%"
+	selected_potion = GameInfo.current_round_details.selected_potion
+	round_time = (MAX_TIME * selected_potion.potion_time_modification) / ((1 + (GameInfo.demand - 1)) / 1.5)
+	$RoundTimer.start(round_time)
+	potion_label.text = selected_potion.name
+	# clean up from possible previous rounds
+	for child: Node in $NextUpContainer/HBoxContainer.get_children():
+		child.queue_free()
+	for ingredient: Ingredient in selected_potion.ingredients:
+		for minigame: Minigame in ingredient.preperation_minigames:
+			var next_up_symbol = TextureRect.new()
+			if (minigame.minigame_type == Minigame.MinigameTypes.TYPING):
+				next_up_symbol.texture = KNIFE
+			else:
+				next_up_symbol.texture = DRAWING
+			$NextUpContainer/HBoxContainer.add_child(next_up_symbol)
