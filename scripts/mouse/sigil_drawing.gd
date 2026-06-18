@@ -3,6 +3,7 @@ extends Sprite2D
 const NUM_POINTS: int = 32
 const CANVAS_SIZE: int = 250
 const RECOGNIZER_SIZE: float = 250.0
+const FAIL_SYMBOL = preload("uid://dawarawgixbne")
 
 var image: Image
 var canvas_texture: ImageTexture
@@ -11,14 +12,9 @@ var normalised_template: Array[Vector2]
 var normalised_template_reverse: Array[Vector2]
 var chosen_sigil: Sigil
 
-const ESSENCE_EXTRACTION = preload("uid://e6sonp1fgd23")
-
 func _ready() -> void:
 	GameEvents.submit_pressed.connect(_on_submit_pressed)
-	image = Image.create_empty(CANVAS_SIZE, CANVAS_SIZE, false, Image.FORMAT_RGBA8)
-	image.fill(Color.WHITE)
-	canvas_texture = ImageTexture.create_from_image(image)
-	texture = canvas_texture
+	set_blank_canvas()
 	position = get_viewport().get_visible_rect().size / 2
 	chosen_sigil = GameInfo.get_current_minigame()
 	normalised_template = normalize_points(chosen_sigil.point_cloud)
@@ -56,8 +52,14 @@ func _input(event: InputEvent) -> void:
 					gesture_points.append(impos)
 
 func _on_submit_pressed() -> void:
-	if recognizable(): GameEvents.emit_minigame_complete_attempt(true)
-	else: GameEvents.emit_minigame_complete_attempt(false)
+	if recognizable():
+		GameEvents.emit_minigame_complete_attempt(true)
+	else:
+		GameEvents.emit_minigame_complete_attempt(false)
+		var fail_symbol: TextureRect = FAIL_SYMBOL.instantiate()
+		add_child(fail_symbol)
+		fail_symbol.position = position - Vector2(690, 460)
+		set_blank_canvas()
 
 func recognizable() -> bool:
 	if gesture_points.size() < 2: return false
@@ -77,8 +79,9 @@ func normalize_points(points: Array[Vector2]) -> Array[Vector2]:
 	return centered_points
 
 func resample(points: Array[Vector2]) -> Array[Vector2]:
-	# points too small
-	if points.size() < 2: return points.duplicate()
+	if points.size() < 2:
+		print("not enough points...")
+		return points.duplicate()
 
 	var curve: Curve2D = Curve2D.new()
 	for point in points:
@@ -153,3 +156,10 @@ func centroid(points: Array[Vector2]) -> Vector2:
 	for point in points:
 		sum += point
 	return sum / points.size()
+
+func set_blank_canvas() -> void:
+	gesture_points.clear()
+	image = Image.create_empty(CANVAS_SIZE, CANVAS_SIZE, false, Image.FORMAT_RGBA8)
+	image.fill(Color.WHITE)
+	canvas_texture = ImageTexture.create_from_image(image)
+	texture = canvas_texture

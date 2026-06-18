@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://ba8w116ntbkex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdhvo"]
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 0.4627451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkbhf"]
+bg_color = Color(0.14044744, 0.14044747, 0.14044738, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="RoundCompleteScreen" type="Control" unique_id=805147969]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackdropContainer" type="PanelContainer" parent="." unique_id=585058366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gdhvo")
+
+[node name="ContentContainer" type="PanelContainer" parent="." unique_id=723102676]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -225.0
+offset_right = 350.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkbhf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContentContainer" unique_id=442382991]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ContentContainer/VBoxContainer" unique_id=1093101390]
+layout_mode = 2
+text = "__ brewed!"
+horizontal_alignment = 1

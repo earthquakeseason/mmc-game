@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://btnfcckv1aubd" path="res://scripts/mouse/drawing_screen.gd" id="1_3th5t"]
 [ext_resource type="PackedScene" uid="uid://2u4454j5rste" path="res://scenes/mouse/sigil_drawing.tscn" id="2_waemk"]
-[ext_resource type="Script" uid="uid://c4vt40fu68d48" path="res://scripts/mouse/explanation_label.gd" id="3_enhgp"]
 [ext_resource type="Script" uid="uid://bjp5n567gvgb6" path="res://scripts/mouse/submit_button.gd" id="4_ilsax"]
 [ext_resource type="Texture2D" uid="uid://cvhcnpsndm6o5" path="res://assets/sigils/fire.png" id="5_0kc3g"]
 
@@ -30,7 +29,6 @@ offset_top = 168.0
 offset_right = 251.0
 offset_bottom = 191.0
 text = "Copy this sigil:"
-script = ExtResource("3_enhgp")
 
 [node name="SubmitButton" type="Button" parent="." unique_id=1481048476]
 anchors_preset = 7
