@@ -5,6 +5,7 @@ extends Node2D
 
 const PRESS_RESULT_LABEL = preload("uid://d6870ntks1ks")
 const BASE_ANIMATION_SPEED: float = 2.1
+const BASE_MAX_SCORE: int = 1500
 
 var chosen_key: int
 var score: int = 0
@@ -15,6 +16,7 @@ func _ready() -> void:
 	position = get_viewport().get_visible_rect().size / 2
 	first_key = true
 	get_new_key()
+	$ProgressBar.max_value = BASE_MAX_SCORE
 	$ProgressBar.value = score
 
 func _input(event) -> void:
@@ -25,8 +27,10 @@ func _input(event) -> void:
 				var score_gained: int = score_gain($NewKeyTimer.time_left)
 				score += score_gained
 				$ProgressBar.value = score
-				if $ProgressBar.value < $ProgressBar.max_value: get_new_key()
-				else: GameEvents.emit_minigame_complete_attempt(true)
+				if score < BASE_MAX_SCORE:
+					get_new_key()
+				else:
+					GameEvents.emit_minigame_complete_attempt(true)
 			else:
 				key_fail()
 

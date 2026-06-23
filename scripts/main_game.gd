@@ -5,7 +5,6 @@ const DRAWING = preload("uid://bil0asoipqfqw")
 const KNIFE = preload("uid://vwiwro34v66g")
 const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
 const ROUND_COMPLETE_SCREEN = preload("uid://ba8w116ntbkex")
-const MAX_TIME: int = 60
 
 var round_time: float
 var drawing_scene: Node
@@ -26,6 +25,7 @@ func _process(_delta: float) -> void:
 
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
+		GameInfo.update_time_left($RoundTimer.time_left)
 		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.TYPING:
 			typing_scene.queue_free()
 		else:
@@ -37,7 +37,6 @@ func _on_complete_attempt(successful: bool) -> void:
 			$RoundTimer.stop()
 		else:
 			start_turn()
-		GameInfo.update_time_left($RoundTimer.time_left)
 
 func _on_next_round() -> void:
 	results_scene.queue_free()
@@ -60,12 +59,13 @@ func start_turn() -> void:
 		add_child(countdown_text_instance)
 
 func start_round() -> void:
-	demand_label.text = "Demand: " + str(int((GameInfo.demand - 1) * 100)) + "%"
+	demand_label.text = "Demand: " + str(roundi((GameInfo.demand - 1) * 100)) + "%"
 	selected_potion = GameInfo.current_round_details.selected_potion
-	round_time = (MAX_TIME * selected_potion.potion_time_modification) / ((1 + (GameInfo.demand - 1)) / 1.5)
+	round_time = (GameInfo.MAX_TIME * selected_potion.potion_time_modification) / ((1 + (GameInfo.demand - 1)) / 1.5)
 	$RoundTimer.start(round_time)
 	potion_label.text = selected_potion.name
 	# clean up from possible previous rounds
+	# todo: make this coloured red or something for the turn the player is currently on
 	for child: Node in $NextUpContainer/HBoxContainer.get_children():
 		child.queue_free()
 	for ingredient: Ingredient in selected_potion.ingredients:

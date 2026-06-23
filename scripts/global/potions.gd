@@ -1,6 +1,6 @@
 extends Node
 
-var all_potions: Array[Potion]
+var all_usable_potions: Array[Potion]
 
 func _ready() -> void:
 	# https://docs.godotengine.org/en/stable/classes/class_diraccess.html
@@ -11,7 +11,8 @@ func _ready() -> void:
 		var file_name = dir.get_next()
 		while file_name != "":
 			if not dir.current_is_dir() and file_name.split(".", false)[1] == "tres":
-				all_potions.append(load(ACCESSED_PATH + file_name))
+				if not file_name == "life_elixir.tres":
+					all_usable_potions.append(load(ACCESSED_PATH + file_name))
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
