@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://xgc8ni3lm0pr"]
 
 [ext_resource type="Script" uid="uid://du1y3ej46on4x" path="res://scripts/main_game.gd" id="1_s3esy"]
+[ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="2_d2op2"]
+[ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="3_0rdsr"]
 
 [node name="MainGame" type="CanvasLayer" unique_id=603355536]
 script = ExtResource("1_s3esy")
@@ -51,9 +53,14 @@ layout_mode = 2
 [node name="PotionLabel" type="Label" parent="GameDetailsContainer/VBoxContainer" unique_id=398169444]
 layout_mode = 2
 text = "Potion"
+label_settings = ExtResource("2_d2op2")
 
 [node name="DemandLabel" type="RichTextLabel" parent="GameDetailsContainer/VBoxContainer" unique_id=1973128002]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("3_0rdsr")
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "Demand: "
 fit_content = true

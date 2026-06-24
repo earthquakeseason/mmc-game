@@ -13,6 +13,7 @@ var results_scene: Node
 var selected_potion: Potion
 @onready var demand_label: RichTextLabel = $GameDetailsContainer/VBoxContainer/DemandLabel
 @onready var potion_label: Label = $GameDetailsContainer/VBoxContainer/PotionLabel
+@onready var next_up_h_box: HBoxContainer = $NextUpContainer/HBoxContainer
 
 func _ready() -> void:
 	GameEvents.complete_attempt.connect(_on_complete_attempt)
@@ -57,6 +58,8 @@ func start_turn() -> void:
 		add_child(drawing_scene)
 		countdown_text_instance.start_animation("Draw!")
 		add_child(countdown_text_instance)
+	# todo: change bg or something..
+	next_up_h_box.get_child(GameInfo.round_num).
 
 func start_round() -> void:
 	demand_label.text = "Demand: " + str(roundi((GameInfo.demand - 1) * 100)) + "%"
@@ -66,7 +69,7 @@ func start_round() -> void:
 	potion_label.text = selected_potion.name
 	# clean up from possible previous rounds
 	# todo: make this coloured red or something for the turn the player is currently on
-	for child: Node in $NextUpContainer/HBoxContainer.get_children():
+	for child: Node in next_up_h_box.get_children():
 		child.queue_free()
 	for ingredient: Ingredient in selected_potion.ingredients:
 		for minigame: Minigame in ingredient.preperation_minigames:
@@ -75,4 +78,4 @@ func start_round() -> void:
 				next_up_symbol.texture = KNIFE
 			else:
 				next_up_symbol.texture = DRAWING
-			$NextUpContainer/HBoxContainer.add_child(next_up_symbol)
+			next_up_h_box.add_child(next_up_symbol)

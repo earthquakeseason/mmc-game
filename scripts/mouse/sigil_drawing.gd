@@ -3,7 +3,8 @@ extends Sprite2D
 const NUM_POINTS: int = 32
 const CANVAS_SIZE: int = 250
 const RECOGNIZER_SIZE: float = 250.0
-const FAIL_SYMBOL = preload("uid://dawarawgixbne")
+const FAIL_SYMBOL: PackedScene = preload("uid://dawarawgixbne")
+const NOTE_ALT: CompressedTexture2D = preload("uid://b56qkovby3ft8")
 
 var image: Image
 var canvas_texture: ImageTexture
@@ -30,8 +31,7 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		var local_pos = to_local(event.position)
 		if !get_rect().has_point(local_pos): return
-		image.fill(Color.WHITE)
-		gesture_points.clear()
+		set_blank_canvas()
 		var pos = to_local(event.position)
 		var impos = pos + get_rect().size / 2.0
 		paint_texture(impos, Color.BLACK)
@@ -82,7 +82,6 @@ func resample(points: Array[Vector2]) -> Array[Vector2]:
 	if points.size() < 2:
 		print("not enough points...")
 		return points.duplicate()
-
 	var curve: Curve2D = Curve2D.new()
 	for point in points:
 		curve.add_point(point)
@@ -159,7 +158,6 @@ func centroid(points: Array[Vector2]) -> Vector2:
 
 func set_blank_canvas() -> void:
 	gesture_points.clear()
-	image = Image.create_empty(CANVAS_SIZE, CANVAS_SIZE, false, Image.FORMAT_RGBA8)
-	image.fill(Color.WHITE)
+	image = NOTE_ALT.get_image()
 	canvas_texture = ImageTexture.create_from_image(image)
 	texture = canvas_texture
