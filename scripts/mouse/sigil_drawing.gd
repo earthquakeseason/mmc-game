@@ -6,7 +6,7 @@ const RECOGNIZER_SIZE: float = 250.0
 const FAIL_SYMBOL: PackedScene = preload("uid://dawarawgixbne")
 const NOTE_ALT: CompressedTexture2D = preload("uid://b56qkovby3ft8")
 
-var image: Image
+var background_image: Image
 var canvas_texture: ImageTexture
 var gesture_points: Array[Vector2]
 var normalised_template: Array[Vector2]
@@ -25,7 +25,7 @@ func _ready() -> void:
 	normalised_template_reverse = normalize_points(reversed)
 
 func paint_texture(pos: Vector2i, paint_color: Color) -> void:
-	image.fill_rect(Rect2i(pos, Vector2i(1,1)).grow(3), paint_color)
+	background_image.fill_rect(Rect2i(pos, Vector2i(1,1)).grow(3), paint_color)
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -36,13 +36,13 @@ func _input(event: InputEvent) -> void:
 		var impos = pos + get_rect().size / 2.0
 		paint_texture(impos, Color.BLACK)
 		gesture_points.append(impos)
-		canvas_texture.update(image)
+		canvas_texture.update(background_image)
 	elif event is InputEventMouseMotion:
 		if Input.is_action_pressed("left_click"):
 			var pos: Vector2 = to_local(event.position)
 			var impos: Vector2 = pos + get_rect().size / 2.0
 			paint_texture(impos, Color.BLACK)
-			canvas_texture.update(image)
+			canvas_texture.update(background_image)
 			if event.relative.length_squared() > 0:
 				var num = ceili(event.relative.length())
 				var target_pos = impos - (event.relative)
@@ -83,8 +83,12 @@ func resample(points: Array[Vector2]) -> Array[Vector2]:
 		print("not enough points...")
 		return points.duplicate()
 	var curve: Curve2D = Curve2D.new()
-	for point in points:
-		curve.add_point(point)
+	for i in range(points.size()):
+		if i > 0:
+			if not points[i - 1].is_equal_approx(points[i]):
+				curve.add_point(points[i])
+		else:
+			curve.add_point(points[i])
 	var total_curve_length: float = curve.get_baked_length()
 	if total_curve_length == 0.0:
 		var temp_points: Array[Vector2]
@@ -158,6 +162,6 @@ func centroid(points: Array[Vector2]) -> Vector2:
 
 func set_blank_canvas() -> void:
 	gesture_points.clear()
-	image = NOTE_ALT.get_image()
-	canvas_texture = ImageTexture.create_from_image(image)
+	background_image = NOTE_ALT.get_image()
+	canvas_texture = ImageTexture.create_from_image(background_image)
 	texture = canvas_texture

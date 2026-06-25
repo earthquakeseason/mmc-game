@@ -5,6 +5,8 @@ const DRAWING = preload("uid://bil0asoipqfqw")
 const KNIFE = preload("uid://vwiwro34v66g")
 const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
 const ROUND_COMPLETE_SCREEN = preload("uid://ba8w116ntbkex")
+const NEXT_UP_CONTAINER_BASE = preload("uid://dmffrccp1rsgw")
+const NEXT_UP_CONTAINER_CURRENT = preload("uid://cuc63iatlc1ai")
 
 var round_time: float
 var drawing_scene: Node
@@ -58,8 +60,13 @@ func start_turn() -> void:
 		add_child(drawing_scene)
 		countdown_text_instance.start_animation("Draw!")
 		add_child(countdown_text_instance)
-	# todo: change bg or something..
-	next_up_h_box.get_child(GameInfo.round_num).
+
+	var current_ingredient_position = GameInfo.total_ingredient_step
+	# currently on round 2 onwards there is no green highlight. i dont know why this is but that should be fixed
+	var current_next_box: PanelContainer = next_up_h_box.get_child(current_ingredient_position)
+	current_next_box.add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_CURRENT)
+	if current_ingredient_position > 0:
+		next_up_h_box.get_child(current_ingredient_position - 1).add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_BASE)
 
 func start_round() -> void:
 	demand_label.text = "Demand: " + str(roundi((GameInfo.demand - 1) * 100)) + "%"
@@ -73,9 +80,12 @@ func start_round() -> void:
 		child.queue_free()
 	for ingredient: Ingredient in selected_potion.ingredients:
 		for minigame: Minigame in ingredient.preperation_minigames:
+			var next_up_container: PanelContainer = PanelContainer.new()
+			next_up_container.add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_BASE)
 			var next_up_symbol = TextureRect.new()
 			if (minigame.minigame_type == Minigame.MinigameTypes.TYPING):
 				next_up_symbol.texture = KNIFE
 			else:
 				next_up_symbol.texture = DRAWING
-			next_up_h_box.add_child(next_up_symbol)
+			next_up_container.add_child(next_up_symbol)
+			next_up_h_box.add_child(next_up_container)

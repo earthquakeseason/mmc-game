@@ -12,6 +12,7 @@ var round_over: bool
 var demand: float
 var ingredient_index: int
 var ingredient_step_index: int
+var total_ingredient_step: int
 
 func set_base_info() -> void:
 	current_round_details = Round.new()
@@ -20,14 +21,17 @@ func set_base_info() -> void:
 	ingredient_index = 0
 	ingredient_step_index = 0
 	current_round_details.selected_potion = Potions.all_usable_potions.pick_random()
+	total_ingredient_step = 0
 
 func increment_turn() -> void:
 	if current_round_details.selected_potion.ingredients[ingredient_index].preperation_minigames.size() - 1 > ingredient_step_index:
 		ingredient_step_index += 1
+		total_ingredient_step += 1
 		return
 	if current_round_details.selected_potion.ingredients.size() - 1 > ingredient_index:
 		ingredient_index += 1
 		ingredient_step_index = 0
+		total_ingredient_step += 1
 		return
 	round_over = true
 
@@ -37,6 +41,7 @@ func increment_round() -> void:
 		demand = 1.0 + (float(round_num) / 10)
 		ingredient_index = 0
 		ingredient_step_index = 0
+		total_ingredient_step = 0
 		round_over = false
 		if round_num != 9:
 			current_round_details.selected_potion = Potions.all_usable_potions.pick_random()

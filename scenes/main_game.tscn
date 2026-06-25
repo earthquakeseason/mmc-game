@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://xgc8ni3lm0pr"]
 
 [ext_resource type="Script" uid="uid://du1y3ej46on4x" path="res://scripts/main_game.gd" id="1_s3esy"]
+[ext_resource type="StyleBox" uid="uid://dmffrccp1rsgw" path="res://resources/containers/next_up_container_base.tres" id="2_0rdsr"]
 [ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="2_d2op2"]
 [ext_resource type="FontFile" uid="uid://cn70ydj1ldlau" path="res://assets/fonts/friendlyscribbles.ttf" id="3_0rdsr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0rdsr"]
 
 [node name="MainGame" type="CanvasLayer" unique_id=603355536]
 script = ExtResource("1_s3esy")
@@ -13,17 +16,18 @@ script = ExtResource("1_s3esy")
 anchors_preset = -1
 anchor_left = 0.067
 anchor_right = 1.0
-offset_left = -0.18400574
+offset_left = 12.815994
 offset_bottom = 27.0
 grow_horizontal = 2
 show_percentage = false
 
 [node name="TimeLeftLabel" type="Label" parent="." unique_id=633326450]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 75.0
-offset_bottom = 25.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 90.0
+offset_bottom = 28.0
 text = "Time left:"
+label_settings = ExtResource("2_d2op2")
 
 [node name="NextUpContainer" type="PanelContainer" parent="." unique_id=1100550112]
 anchors_preset = 2
@@ -32,6 +36,7 @@ anchor_bottom = 1.0
 offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0rdsr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NextUpContainer" unique_id=1050507193]
 layout_mode = 2
@@ -42,17 +47,20 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -103.0
-offset_top = -50.0
+offset_left = -113.0
+offset_top = -60.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_styles/panel = ExtResource("2_0rdsr")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameDetailsContainer" unique_id=990054403]
 layout_mode = 2
 
 [node name="PotionLabel" type="Label" parent="GameDetailsContainer/VBoxContainer" unique_id=398169444]
 layout_mode = 2
-text = "Potion"
+text = "Potion:"
 label_settings = ExtResource("2_d2op2")
 
 [node name="DemandLabel" type="RichTextLabel" parent="GameDetailsContainer/VBoxContainer" unique_id=1973128002]

@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://d6870ntks1ks"]
 
+[ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="1_qjsrh"]
 [ext_resource type="Script" uid="uid://da18dnqwe1wbf" path="res://scripts/keyboard/press_result_label.gd" id="1_x5o6f"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_tpf68"]
 
 [sub_resource type="Animation" id="Animation_uy4aq"]
 length = 0.001
@@ -45,7 +44,7 @@ _data = {
 offset_right = 17.0
 offset_bottom = 23.0
 text = "HI"
-label_settings = SubResource("LabelSettings_tpf68")
+label_settings = ExtResource("1_qjsrh")
 horizontal_alignment = 1
 script = ExtResource("1_x5o6f")
 
