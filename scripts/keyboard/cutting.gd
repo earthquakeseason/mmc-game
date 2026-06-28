@@ -9,7 +9,7 @@ const BASE_MAX_SCORE: int = 1500
 
 var chosen_key: int
 var score: int = 0
-var key_time: float = 2.1 / GameInfo.demand
+var key_time: float = 2.1 / (1 + (((float)(GameInfo.round_num)) / 15))
 var first_key: bool = false
 
 func _ready() -> void:

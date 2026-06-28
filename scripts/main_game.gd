@@ -69,9 +69,9 @@ func start_turn() -> void:
 		next_up_h_box.get_child(current_ingredient_position - 1).add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_BASE)
 
 func start_round() -> void:
-	demand_label.text = "Demand: " + str(roundi((GameInfo.demand - 1) * 100)) + "%"
+	demand_label.text = str(9 - GameInfo.round_num) + " left"
 	selected_potion = GameInfo.current_round_details.selected_potion
-	round_time = (GameInfo.MAX_TIME * selected_potion.potion_time_modification) / ((1 + (GameInfo.demand - 1)) / 1.5)
+	round_time = (GameInfo.MAX_TIME * selected_potion.potion_time_modification) / (1 + (((float)(GameInfo.round_num)) / 10))
 	$RoundTimer.start(round_time)
 	potion_label.text = selected_potion.name
 	# clean up from possible previous rounds
@@ -89,3 +89,7 @@ func start_round() -> void:
 				next_up_symbol.texture = DRAWING
 			next_up_container.add_child(next_up_symbol)
 			next_up_h_box.add_child(next_up_container)
+
+
+func _on_round_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://scenes/lose_screen.tscn")

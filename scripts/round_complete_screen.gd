@@ -10,7 +10,7 @@ const STAR = preload("uid://cp4ph5k08jxmn")
 func _ready() -> void:
 	title_label.text = "You successfully brewed " + GameInfo.current_round_details.selected_potion.name
 	time_label.text = "Time left: " + str(round(GameInfo.current_round_details.time)) + "s"
-	var current_time_modified: float = (GameInfo.current_round_details.time / GameInfo.current_round_details.selected_potion.potion_time_modification) * ((1 + (GameInfo.demand - 1)) / 1.5)
+	var current_time_modified: float = (GameInfo.current_round_details.time / GameInfo.current_round_details.selected_potion.potion_time_modification) * ((1 + ((float)(GameInfo.round_num)) / 10) / 1.5)
 	for i in range(3):
 		var star: TextureRect = TextureRect.new()
 		if (current_time_modified / float(GameInfo.MAX_TIME) > (float(i + 1) / 5)):

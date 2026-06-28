@@ -1,15 +1,12 @@
 extends Node
 
 const PHYSICAL_KEYCODE_OPTIONS: Array[int] = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
-const MAX_TIME: int = 60
+const MAX_TIME: int = 45
 const VICTORY_SCREEN = preload("uid://dn6ggjehuv3y6")
-
-const LIFE_ELIXIR = preload("uid://xfsp14ymeqwl")
 
 var round_num: int
 var current_round_details: Round
 var round_over: bool
-var demand: float
 var ingredient_index: int
 var ingredient_step_index: int
 var total_ingredient_step: int
@@ -17,7 +14,6 @@ var total_ingredient_step: int
 func set_base_info() -> void:
 	current_round_details = Round.new()
 	round_num = 0
-	demand = 1.0
 	ingredient_index = 0
 	ingredient_step_index = 0
 	current_round_details.selected_potion = Potions.all_usable_potions.pick_random()
@@ -38,7 +34,6 @@ func increment_turn() -> void:
 func increment_round() -> void:
 	round_num += 1
 	if round_num < 10:
-		demand = 1.0 + (float(round_num) / 10)
 		ingredient_index = 0
 		ingredient_step_index = 0
 		total_ingredient_step = 0
