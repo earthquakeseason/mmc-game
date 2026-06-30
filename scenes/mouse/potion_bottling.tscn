@@ -1,23 +1,60 @@
 [gd_scene format=3 uid="uid://c47r5qe8xe2ah"]
 
-[ext_resource type="Texture2D" uid="uid://d0hk7ct3sqmh4" path="res://icon.svg" id="1_brvvn"]
-[ext_resource type="Script" uid="uid://dnw0o0r5yil2i" path="res://scripts/potions/potion_bottling.gd" id="1_yl3ja"]
+[ext_resource type="Script" uid="uid://cqirnnjlwas42" path="res://scenes/mouse/cork.gd" id="2_2j23a"]
+[ext_resource type="Texture2D" uid="uid://cowq405yxhb3r" path="res://assets/potions/potion.png" id="2_40df4"]
+[ext_resource type="Texture2D" uid="uid://dslpihyqu8m07" path="res://assets/potions/cork.png" id="3_2j23a"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl3ja"]
-size = Vector2(120, 120)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40df4"]
+size = Vector2(13, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j23a"]
+size = Vector2(15, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypklg"]
+size = Vector2(63, 20)
 
 [node name="PotionBottling" type="Node2D" unique_id=396043944]
-script = ExtResource("1_yl3ja")
 
-[node name="Potion" type="RigidBody2D" parent="." unique_id=1816180063]
+[node name="Potion" type="StaticBody2D" parent="." unique_id=1067066266]
+position = Vector2(585, 376)
+scale = Vector2(3, 3)
 input_pickable = true
-gravity_scale = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Potion" unique_id=1723266931]
-texture = ExtResource("1_brvvn")
+texture = ExtResource("2_40df4")
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Potion" unique_id=967559075]
-shape = SubResource("RectangleShape2D_yl3ja")
+[node name="PotionPolygonCollision" type="CollisionPolygon2D" parent="Potion" unique_id=353469754]
+polygon = PackedVector2Array(8.800003, -44.2, 7, -43, 7, -32, 8.300003, -18.3, 8.300003, -5.5999985, 26.699997, 4.699997, 28.5, 4.699997, 34, 15.800003, 32.300003, 38.4, 32.300003, 39, 24.300003, 45.9, 11.300003, 49, -10.400002, 48.300003, -18.3, 48.300003, -30.6, 37.9, -33.3, 17.099998, -33.3, 12.5, -23.3, -0.40000153, -12.900002, -5.299999, -9.700001, -5.299999, -8, -30, -8.2, -40, -11.900002, -43, -18.7, -15.900002, -18.7, -14.200001, -32.4, -4.700001, -34.7, -4.700001, -41.7, 13.300003, -42, 17, -42.7, 30.699997, -42.7, 36.5, -34.7, 48.5, -34.7, 51.6, -27.7, 54.5, -27.7, 56.199997, -12.799999, 58.699997, 17.199997, 58.699997, 36.300003, 49.699997, 38, 46, 41, 38, 43, 33, 43, 22, 42, 18, 42, 12, 36.699997, -0.5, 36.699997, -2.5, 17.400002, -12.200001, 15.699997, -29.8, 15.699997, -39.1)
+metadata/_edit_lock_ = true
 
-[connection signal="mouse_entered" from="Potion" to="." method="_on_rigid_body_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Potion" to="." method="_on_rigid_body_2d_mouse_exited"]
+[node name="Cork" type="RigidBody2D" parent="." unique_id=1690648852]
+position = Vector2(758, 424)
+input_pickable = true
+script = ExtResource("2_2j23a")
+
+[node name="CorkSprite" type="Sprite2D" parent="Cork" unique_id=1680388138]
+scale = Vector2(3, 3)
+texture = ExtResource("3_2j23a")
+metadata/_edit_lock_ = true
+
+[node name="HitCollisionShape" type="CollisionShape2D" parent="Cork" unique_id=2084688294]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_40df4")
+metadata/_edit_lock_ = true
+
+[node name="HoverCollisionShape" type="CollisionShape2D" parent="Cork" unique_id=1751446309]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_2j23a")
+debug_color = Color(0.9543254, 1.347661e-06, 0.5515211, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2072826939]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=239908051]
+position = Vector2(757.5, 475)
+shape = SubResource("RectangleShape2D_ypklg")
+
+[connection signal="input_event" from="Cork" to="Cork" method="_on_input_event"]
+[connection signal="mouse_entered" from="Cork" to="Cork" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Cork" to="Cork" method="_on_mouse_exited"]
