@@ -6,6 +6,7 @@ var mouse_over_cork: bool = false
 func _process(_delta: float) -> void:
 	if grabbed:
 		var mouse_pos = get_global_mouse_position()
+		get rect here
 		if get_viewport_rect().encloses($HitCollisionShape.rect):
 			global_position = lerp(global_position, mouse_pos, 1.0)
 
