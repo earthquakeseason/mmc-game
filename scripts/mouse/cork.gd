@@ -5,8 +5,12 @@ const ROTATE_AMOUNT: float = deg_to_rad(10.0)
 var grabbed: bool = false
 var mouse_over_cork: bool = false
 var prev_safe_mouse_pos: Vector2
+var target_position: Vector2
 var target_rotation: float = 0.0
 var pending_lock: bool = false
+var final_lock: bool = false
+
+signal display_stars
 
 func _process(delta: float) -> void:
 	if grabbed and not freeze:
@@ -18,6 +22,8 @@ func _process(delta: float) -> void:
 			global_position = prev_safe_mouse_pos
 		linear_velocity = Vector2(0.0, 0.0)
 		rotation = lerp_angle(rotation, target_rotation, delta * 15)
+	if final_lock:
+		global_position = lerp(global_position, target_position, 0.3)
 
 func _on_mouse_entered() -> void:
 	mouse_over_cork = true
@@ -35,9 +41,15 @@ func _input(event: InputEvent) -> void:
 	if grabbed:
 		if event.is_action_pressed("scroll_up"):
 			target_rotation -= ROTATE_AMOUNT
-
 		elif event.is_action_pressed("scroll_down"):
 			target_rotation += ROTATE_AMOUNT
+
+	if event is InputEventMouseButton:
+		if freeze and event.double_click and not final_lock:
+			final_lock = true
+			print("double")
+			target_position = Vector2(position.x, position.y + 20)
+			display_stars.emit()
 
 func _on_potion_opening_body_entered(body: Node2D) -> void:
 	if body == self:
@@ -54,5 +66,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func _finish_lock() -> void:
 	freeze = true
-	global_position = Vector2(583.5, 245.0)
+	global_position = Vector2(584.0, 245.0)
 	global_rotation = 0
