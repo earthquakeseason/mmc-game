@@ -7,10 +7,12 @@ const COUNTDOWN_TEXT = preload("uid://c762pif0pw7e5")
 const ROUND_COMPLETE_SCREEN = preload("uid://ba8w116ntbkex")
 const NEXT_UP_CONTAINER_BASE = preload("uid://dmffrccp1rsgw")
 const NEXT_UP_CONTAINER_CURRENT = preload("uid://cuc63iatlc1ai")
+const POTION_BOTTLING = preload("uid://c47r5qe8xe2ah")
 
 var round_time: float
 var drawing_scene: Node
 var typing_scene: Node
+var bottling_scene: Node
 var results_scene: Node
 var selected_potion: Potion
 @onready var demand_label: RichTextLabel = $GameDetailsContainer/VBoxContainer/DemandLabel
@@ -29,10 +31,14 @@ func _process(_delta: float) -> void:
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
 		GameInfo.update_time_left($RoundTimer.time_left)
-		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.TYPING:
+		# to ensure there isnt any weird carry-over stuff from previous varients of that minigame
+		todo: fix what i broke here... (and make it less repetative)
+		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.TYPING and typing_scene != null:
 			typing_scene.queue_free()
-		else:
+		elif GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.DRAWING and drawing_scene != null:
 			drawing_scene.queue_free()
+		elif GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.BOTTLING and bottling_scene != null:
+			bottling_scene.queue_free()
 		GameInfo.increment_turn()
 		if GameInfo.round_over:
 			results_scene = ROUND_COMPLETE_SCREEN.instantiate()
@@ -48,18 +54,27 @@ func _on_next_round() -> void:
 	start_round()
 
 func start_turn() -> void:
-	var minigame_requirement_current: Minigame = GameInfo.get_current_minigame()
-	var countdown_text_instance = COUNTDOWN_TEXT.instantiate()
-	if minigame_requirement_current.minigame_type == Minigame.MinigameTypes.TYPING:
-		typing_scene = minigame_requirement_current.scene.instantiate()
-		add_child(typing_scene)
-		countdown_text_instance.start_animation("Type!")
-		add_child(countdown_text_instance)
-	else:
-		drawing_scene = DRAWING_SCREEN.instantiate()
-		add_child(drawing_scene)
-		countdown_text_instance.start_animation("Draw!")
-		add_child(countdown_text_instance)
+	var minigame: Minigame = GameInfo.get_current_minigame()
+	var countdown = COUNTDOWN_TEXT.instantiate()
+	var scene: Node
+	var text: String
+
+	match minigame.minigame_type:
+		Minigame.MinigameTypes.TYPING:
+			scene = minigame.scene.instantiate()
+			text = "Type!"
+
+		Minigame.MinigameTypes.DRAWING:
+			scene = DRAWING_SCREEN.instantiate()
+			text = "Draw!"
+
+		Minigame.MinigameTypes.BOTTLING:
+			scene = POTION_BOTTLING.instantiate()
+			text = "Bottle!"
+
+	add_child(scene)
+	countdown.start_animation(text)
+	add_child(countdown)
 
 	var current_ingredient_position = GameInfo.total_ingredient_step
 	# currently on round 2 onwards there is no green highlight. i dont know why this is but that should be fixed

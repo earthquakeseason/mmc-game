@@ -1,6 +1,9 @@
 extends RigidBody2D
 
 const ROTATE_AMOUNT: float = deg_to_rad(10.0)
+const MAX_DRAG_SPEED: float = 1500.0
+const DRAG_LINEAR_DAMP: float = 8.0
+const CORK_FINAL_POSITION: Vector2 = Vector2(569.0, 331.0)
 
 var grabbed: bool = false
 var mouse_over_cork: bool = false
@@ -12,16 +15,26 @@ var final_lock: bool = false
 
 signal display_stars
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	# feels less harsh than CCD_MODE_CAST_SHAPE (and is supposedly faster), check up on this
+	# again later
+	continuous_cd = RigidBody2D.CCD_MODE_CAST_RAY
+
+func _physics_process(delta: float) -> void:
 	if grabbed and not freeze:
 		var mouse_pos: Vector2 = get_global_mouse_position()
 		if get_viewport_rect().has_point(mouse_pos):
-			global_position = lerp(global_position, mouse_pos, 1.0)
-			prev_safe_mouse_pos = global_position
-		else:
-			global_position = prev_safe_mouse_pos
-		linear_velocity = Vector2(0.0, 0.0)
+			prev_safe_mouse_pos = mouse_pos
+
+		var to_target: Vector2 = prev_safe_mouse_pos - global_position
+		var desired_velocity: Vector2 = to_target / delta
+		
+		linear_velocity = desired_velocity.limit_length(MAX_DRAG_SPEED)
+		linear_damp = DRAG_LINEAR_DAMP
 		rotation = lerp_angle(rotation, target_rotation, delta * 15)
+	else:
+		linear_damp = 0.0
+
 	if final_lock:
 		global_position = lerp(global_position, target_position, 0.3)
 
@@ -47,7 +60,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if freeze and event.double_click and not final_lock:
 			final_lock = true
-			print("double")
 			target_position = Vector2(position.x, position.y + 20)
 			display_stars.emit()
 
@@ -57,14 +69,13 @@ func _on_potion_opening_body_entered(body: Node2D) -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if pending_lock:
-		state.transform.origin = Vector2(584.0, 245.0)
+		state.transform.origin = CORK_FINAL_POSITION
 		state.linear_velocity = Vector2.ZERO
 		state.angular_velocity = 0.0
-
 		pending_lock = false
 		call_deferred("_finish_lock")
 
 func _finish_lock() -> void:
 	freeze = true
-	global_position = Vector2(584.0, 245.0)
+	global_position = CORK_FINAL_POSITION
 	global_rotation = 0

@@ -10,6 +10,10 @@ var round_over: bool
 var ingredient_index: int
 var ingredient_step_index: int
 var total_ingredient_step: int
+var bottled: bool
+
+func _ready() -> void:
+	set_base_info()
 
 func set_base_info() -> void:
 	current_round_details = Round.new()
@@ -29,6 +33,8 @@ func increment_turn() -> void:
 		ingredient_step_index = 0
 		total_ingredient_step += 1
 		return
+	if not bottled:
+		return
 	round_over = true
 
 func increment_round() -> void:
@@ -45,9 +51,6 @@ func increment_round() -> void:
 	else:
 		await get_tree().process_frame
 		get_tree().change_scene_to_packed(VICTORY_SCREEN)
-
-func _ready() -> void:
-	set_base_info()
 
 func get_current_minigame() -> Minigame:
 	return current_round_details.selected_potion.ingredients[ingredient_index].preperation_minigames[ingredient_step_index]

@@ -12,4 +12,5 @@ script = ExtResource("2_x3c5t")
 name = "Elixir of Life"
 ingredients = Array[ExtResource("1_ugbg3")]([ExtResource("2_vlv1o"), ExtResource("3_mrdsd"), ExtResource("4_gj7bl"), ExtResource("5_mrdsd")])
 potion_time_modification = 2.0
+potion_color = Color(0.99999994, 0.23946875, 0.1787923, 1)
 metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

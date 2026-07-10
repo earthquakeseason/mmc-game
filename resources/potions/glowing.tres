@@ -9,4 +9,5 @@ script = ExtResource("2_djyou")
 name = "Potion of Glowing"
 ingredients = Array[ExtResource("1_bko76")]([ExtResource("2_ytvee")])
 potion_time_modification = 0.8
+potion_color = Color(1, 0.9254902, 0, 1)
 metadata/_custom_type_script = "uid://bfmc8av4kl1sw"
