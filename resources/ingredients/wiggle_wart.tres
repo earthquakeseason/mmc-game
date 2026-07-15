@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cprekgomiehb8"]
 
+[ext_resource type="Texture2D" uid="uid://b387ie8bmb3e8" path="res://assets/ingredients/wigglewart.png" id="1_0ndm7"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_6d2gy"]
 [ext_resource type="Resource" uid="uid://b6qfm86a2yj1e" path="res://resources/sigils/flame.tres" id="1_82hd7"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_hyshb"]
@@ -9,4 +10,5 @@
 script = ExtResource("1_hyshb")
 name = "Wiggle Wart"
 preperation_minigames = Array[ExtResource("1_6d2gy")]([ExtResource("1_82hd7"), ExtResource("3_oewc3")])
+initial_state = ExtResource("1_0ndm7")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

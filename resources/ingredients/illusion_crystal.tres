@@ -3,9 +3,13 @@
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_3xwcf"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_nxuut"]
 [ext_resource type="Resource" uid="uid://babiiayer8jn5" path="res://resources/mechanical/crushing.tres" id="1_rr5xg"]
+[ext_resource type="Texture2D" uid="uid://csxnwq2m5b4m" path="res://assets/ingredients/illusion_crystal_crushed.png" id="1_x1gg7"]
+[ext_resource type="Texture2D" uid="uid://bw2hoci1yeg5f" path="res://assets/ingredients/illusion_crystal.png" id="2_476g8"]
 
 [resource]
 script = ExtResource("1_nxuut")
 name = "Illusion Crystal"
 preperation_minigames = Array[ExtResource("1_3xwcf")]([ExtResource("1_rr5xg")])
+initial_state = ExtResource("2_476g8")
+final_state = ExtResource("1_x1gg7")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

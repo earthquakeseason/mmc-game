@@ -74,17 +74,14 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_0rdsr")
 layout_mode = 2
 
 [node name="GameDetailsContainer" type="PanelContainer" parent="." unique_id=1689190647]
-anchors_preset = 3
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -134.0
-offset_top = -60.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_left = -131.0
+offset_top = 60.0
+offset_right = -7.0
+offset_bottom = 110.0
 grow_horizontal = 0
-grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_wi4c7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameDetailsContainer" unique_id=990054403]

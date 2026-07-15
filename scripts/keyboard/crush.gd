@@ -2,10 +2,10 @@ extends Node2D
 
 var increment_stage: int = 0
 var original_y_scale: float
-const HEART_CRYSTAL = preload("res://resources/ingredients/heart_crystal.tres")
+var current_ingredient: Ingredient = GameInfo.get_current_ingredient()
 
 func _ready() -> void:
-	$Ingredient.texture = HEART_CRYSTAL.initial_state
+	$Ingredient.texture = current_ingredient.initial_state
 	original_y_scale = $Ingredient.scale.y
 	GameEvents.increment_mechanical_stage.connect(_on_game_event_increment)
 	var tween: Tween = create_tween()
@@ -15,6 +15,6 @@ func _on_game_event_increment() -> void:
 	increment_stage += 1
 	if increment_stage >= 4:
 		$Ingredient.scale.y = original_y_scale
-		$Ingredient.texture = HEART_CRYSTAL.final_state
+		$Ingredient.texture = current_ingredient.final_state
 	else:
-		$Ingredient.scale.y = $Ingredient.scale.y - 0.03
+		$Ingredient.scale.y = $Ingredient.scale.y - 0.2

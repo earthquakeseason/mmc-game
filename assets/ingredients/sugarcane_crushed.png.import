@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyw4nij8a8j3t"
-path="res://.godot/imported/mortar.png-0b9e86f297b7a2a5a4fc72905d5cd97d.ctex"
+uid="uid://clkw0mobtf52r"
+path="res://.godot/imported/sugarcane_crushed.png-92ce652bef9f926c56fdb2fda7f6fe17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mechanical/mortar.png"
-dest_files=["res://.godot/imported/mortar.png-0b9e86f297b7a2a5a4fc72905d5cd97d.ctex"]
+source_file="res://assets/ingredients/sugarcane_crushed.png"
+dest_files=["res://.godot/imported/sugarcane_crushed.png-92ce652bef9f926c56fdb2fda7f6fe17.ctex"]
 
 [params]
 

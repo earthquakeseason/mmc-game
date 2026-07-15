@@ -139,7 +139,6 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_uy4aq")
 
 [node name="Crush" parent="." unique_id=1400525281 instance=ExtResource("3_yyghg")]
-position = Vector2(294, 119)
-scale = Vector2(2, 2)
+position = Vector2(317, 45)
 
 [connection signal="timeout" from="NewKeyTimer" to="." method="_on_new_key_timer_timeout"]

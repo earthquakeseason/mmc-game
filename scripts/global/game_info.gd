@@ -75,7 +75,8 @@ func increment_round() -> void:
 		bottled = false
 		round_over = false
 		if round_num != 9:
-			current_round_details.selected_potion = Potions.all_usable_potions.pick_random()
+			# the filter is removing the current potion from selection so there aren't double ups
+			current_round_details.selected_potion = Potions.all_usable_potions.filter(func(potion: Potion): return potion != current_round_details.selected_potion).pick_random()
 		else:
 			current_round_details.selected_potion = load("res://resources/potions/life_elixir.tres")
 	else:

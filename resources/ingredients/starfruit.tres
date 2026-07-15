@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://duujlkqfewkdo"]
 
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_52dvg"]
+[ext_resource type="Texture2D" uid="uid://dd2ghiimmhf6o" path="res://assets/ingredients/star_fruit.png" id="1_nx1bf"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_o1e7k"]
 [ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="3_nx1bf"]
 
@@ -8,4 +9,5 @@
 script = ExtResource("1_o1e7k")
 name = "Starfruit"
 preperation_minigames = Array[ExtResource("1_52dvg")]([ExtResource("3_nx1bf")])
+initial_state = ExtResource("1_nx1bf")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"
