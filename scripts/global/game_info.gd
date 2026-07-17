@@ -2,7 +2,10 @@ extends Node
 
 const PHYSICAL_KEYCODE_OPTIONS: Array[int] = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
 const MAX_TIME: int = 45
-const VICTORY_SCREEN = preload("uid://dn6ggjehuv3y6")
+const VICTORY_SCREEN = preload("res://scenes/victory_screen.tscn")
+# mechanical minigames
+const CRUSHING = preload("res://resources/mechanical/crushing.tres")
+const CUTTING = preload("res://resources/mechanical/cutting.tres")
 
 var round_num: int
 var current_round_details: Round
@@ -16,6 +19,9 @@ var drawing_accuracy: int
 var cork_speed: float
 
 func _ready() -> void:
+	reset_values()
+
+func reset_values() -> void:
 	current_round_details = Round.new()
 	round_num = 0
 	ingredient_index = 0
@@ -83,6 +89,7 @@ func increment_round() -> void:
 		await get_tree().process_frame
 		get_tree().change_scene_to_packed(VICTORY_SCREEN)
 
+## returns the minigame currently being attempted, should be ran after incrementing turns and similar
 func get_current_minigame() -> Minigame:
 	if total_ingredient_step >= get_total_minigames():
 		var bottling_minigame: Minigame = Minigame.new()

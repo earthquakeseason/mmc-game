@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://5skro2a8y50u"]
 
+[ext_resource type="Texture2D" uid="uid://bj1kdtdhe2i05" path="res://assets/ingredients/golden_fig.png" id="1_atluo"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_rf320"]
 [ext_resource type="Resource" uid="uid://nq24dp6nlk3e" path="res://resources/mechanical/cutting.tres" id="2_042og"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="2_vuubn"]
@@ -9,4 +10,5 @@
 script = ExtResource("2_vuubn")
 name = "Golden Fig"
 preperation_minigames = Array[ExtResource("1_rf320")]([ExtResource("2_042og"), ExtResource("3_atluo")])
+initial_state = ExtResource("1_atluo")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

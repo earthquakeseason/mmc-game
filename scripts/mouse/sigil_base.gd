@@ -4,3 +4,4 @@ extends Minigame
 @export var point_cloud: Array[Vector2] = []
 @export var match_threshold: float = 55.0
 @export var icon: Texture2D
+@export var sigil_effect_shader: Shader

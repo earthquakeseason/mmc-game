@@ -9,5 +9,6 @@
 script = ExtResource("2_47pps")
 name = "Potion of Swiftness"
 ingredients = Array[ExtResource("1_3q8uu")]([ExtResource("2_scn23"), ExtResource("3_s5iai")])
+potion_time_modification = 1.15
 potion_color = Color(0, 0.83924, 0.45631802, 1)
 metadata/_custom_type_script = "uid://bfmc8av4kl1sw"

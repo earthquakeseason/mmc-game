@@ -3,9 +3,11 @@
 [ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="1_71bae"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_acqma"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_ohkbg"]
+[ext_resource type="Texture2D" uid="uid://cn7sdi64e6x8d" path="res://assets/ingredients/grimy_toadflax.png" id="1_q6ceq"]
 
 [resource]
 script = ExtResource("1_ohkbg")
 name = "Grimy Toadflax"
 preperation_minigames = Array[ExtResource("1_acqma")]([ExtResource("1_71bae")])
+initial_state = ExtResource("1_q6ceq")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

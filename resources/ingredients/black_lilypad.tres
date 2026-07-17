@@ -3,10 +3,12 @@
 [ext_resource type="Resource" uid="uid://b6qfm86a2yj1e" path="res://resources/sigils/flame.tres" id="1_36j2y"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_khq5k"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_wllvt"]
+[ext_resource type="Texture2D" uid="uid://dpsqg07gua2g1" path="res://assets/ingredients/black_lilypad.png" id="1_xuu31"]
 [ext_resource type="Resource" uid="uid://doaqteuomv4ko" path="res://resources/sigils/essence_extraction.tres" id="3_t4aq5"]
 
 [resource]
 script = ExtResource("1_khq5k")
 name = "Black Lilypad"
 preperation_minigames = Array[ExtResource("1_wllvt")]([ExtResource("1_36j2y"), ExtResource("3_t4aq5")])
+initial_state = ExtResource("1_xuu31")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

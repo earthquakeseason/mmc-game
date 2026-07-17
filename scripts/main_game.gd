@@ -42,8 +42,8 @@ func _on_complete_attempt(successful: bool) -> void:
 func _on_next_round() -> void:
 	game_scene.queue_free()
 	GameInfo.increment_round()
-	start_turn()
 	start_round()
+	start_turn()
 
 func start_round() -> void:
 	demand_label.text = str(9 - GameInfo.round_num) + " potions left"
@@ -52,10 +52,14 @@ func start_round() -> void:
 	$RoundTimer.start(round_time)
 	$RoundTimer.paused = false
 	potion_label.text = selected_potion.name
+	
 	# clean up from possible previous rounds
-	# todo: make this coloured red or something for the turn the player is currently on
 	for child: Node in next_up_h_box.get_children():
+		# required because queue_free takes too long to remove form the scene tree
+		# so the add_child parts get called too soon (to my knowledge)
+		next_up_h_box.remove_child(child)
 		child.queue_free()
+
 	for ingredient: Ingredient in selected_potion.ingredients:
 		for minigame: Minigame in ingredient.preperation_minigames:
 			var next_up_container: PanelContainer = PanelContainer.new()
@@ -99,9 +103,9 @@ func start_turn() -> void:
 	add_child(countdown)
 
 	var current_ingredient_position = GameInfo.total_ingredient_step
-	# currently on round 2 onwards there is no green highlight. i dont know why this is but that should be fixed
 	var current_next_box: PanelContainer = next_up_h_box.get_child(current_ingredient_position)
 	current_next_box.add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_CURRENT)
+	
 	if current_ingredient_position > 0:
 		next_up_h_box.get_child(current_ingredient_position - 1).add_theme_stylebox_override("panel", NEXT_UP_CONTAINER_BASE)
 

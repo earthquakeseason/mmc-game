@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cnlq6cprllpiy" path="res://scripts/keyboard/cutting.gd" id="1_t0b7i"]
 [ext_resource type="LabelSettings" uid="uid://djmdujcyxyia5" path="res://resources/labels/base_label.tres" id="2_nai40"]
-[ext_resource type="PackedScene" uid="uid://bsmobqj58qnh6" path="res://scenes/keyboard/crush.tscn" id="3_yyghg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpf68"]
 draw_center = false
@@ -137,8 +136,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_tpf68")
 [node name="ClosingAnimationPlayer" type="AnimationPlayer" parent="ButtonContainer/PressBorder" unique_id=1441156711]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_uy4aq")
-
-[node name="Crush" parent="." unique_id=1400525281 instance=ExtResource("3_yyghg")]
-position = Vector2(317, 45)
 
 [connection signal="timeout" from="NewKeyTimer" to="." method="_on_new_key_timer_timeout"]

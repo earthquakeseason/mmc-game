@@ -8,14 +8,29 @@ const BASE_ANIMATION_SPEED: float = 2.1
 const BASE_MAX_SCORE: int = 1500
 ## 5 total stages, not starting at 0
 const INGREDIENT_STAGES_COUNT: int = 5
+# scenes
+const CRUSH = preload("res://scenes/keyboard/crush.tscn")
+const SLICE = preload("res://scenes/keyboard/slice.tscn")
 
 var chosen_key: int
 var score: int = 0
 var key_time: float = 2.1 / (1 + (((float)(GameInfo.round_num)) / 15))
 var first_key: bool = false
 var ingredient_stage_counter: int = 0
+var current_minigame: Minigame
 
 func _ready() -> void:
+	current_minigame = GameInfo.get_current_minigame()
+	if current_minigame.get_current_minigame() == GameInfo.CRUSHING:
+		var crush_instance: Node = CRUSH.instantiate()
+		crush_instance.position.x = -500 
+		add_child(crush_instance)
+	# technically could be else as ideally it could never be anything else but you never know i guess
+	elif current_minigame.get_current_minigame() == GameInfo.CUTTING:
+		var slice_instance: Node = SLICE.instantiate()
+		slice_instance.position.x = -500 
+		add_child(slice_instance)
+
 	position = get_viewport().get_visible_rect().size / 2
 	first_key = true
 	get_new_key()

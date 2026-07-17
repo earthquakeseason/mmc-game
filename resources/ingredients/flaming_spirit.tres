@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ingredient" format=3 uid="uid://cym5ko6638uk5"]
 
+[ext_resource type="Texture2D" uid="uid://cy274owilruqp" path="res://assets/ingredients/flaming_spirit.png" id="1_2dols"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_htrwx"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_w4v85"]
 [ext_resource type="Resource" uid="uid://b4o6p3lyv638g" path="res://resources/sigils/frost.tres" id="2_xaov1"]
@@ -9,4 +10,5 @@
 script = ExtResource("1_htrwx")
 name = "Flaming Spirit"
 preperation_minigames = Array[ExtResource("1_w4v85")]([ExtResource("2_xaov1"), ExtResource("3_2dols")])
+initial_state = ExtResource("1_2dols")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

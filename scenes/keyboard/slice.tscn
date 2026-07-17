@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://jritg4ps60ry"]
+
+[ext_resource type="Script" uid="uid://b10h1w6cmk5m4" path="res://scripts/keyboard/slice.gd" id="1_jfoc3"]
+[ext_resource type="Texture2D" uid="uid://bjspgtyup7jc2" path="res://assets/ingredients/miracle_fruit.png" id="1_ydcw2"]
+
+[node name="Slice" type="Node2D" unique_id=1741926848]
+script = ExtResource("1_jfoc3")
+
+[node name="Ingredient" type="Sprite2D" parent="." unique_id=1930253871]
+texture = ExtResource("1_ydcw2")
