@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _on_game_event_increment(shrink: bool) -> void:
 	if shrink:
+		$CrushAudioPlayer.play()
 		increment_stage += 1
 		if increment_stage >= 4:
 			$Ingredient.scale.y = original_y_scale

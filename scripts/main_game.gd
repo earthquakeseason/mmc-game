@@ -10,6 +10,7 @@ const NEXT_UP_CONTAINER_BASE = preload("uid://dmffrccp1rsgw")
 const NEXT_UP_CONTAINER_CURRENT = preload("uid://cuc63iatlc1ai")
 const POTION_BOTTLING = preload("uid://c47r5qe8xe2ah")
 const OPTIONS = preload("res://scenes/options.tscn")
+const PAGE_TURN = preload("res://assets/sigils/page_turn.wav")
 
 var round_time: float
 var game_scene: Node
@@ -45,6 +46,9 @@ func _input(event: InputEvent) -> void:
 
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
+		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.DRAWING:
+			$SFXPlayer.stream = PAGE_TURN
+			$SFXPlayer.play()
 		GameInfo.increment_turn()
 		GameInfo.update_time_left($RoundTimer.time_left)
 		if GameInfo.round_over:
@@ -63,7 +67,7 @@ func _on_next_round() -> void:
 	start_turn()
 
 func start_round() -> void:
-	demand_label.text = str(9 - GameInfo.round_num) + " potions left"
+	demand_label.text = str(GameInfo.ROUND_COUNT - (GameInfo.round_num + 1)) + " potions left"
 	selected_potion = GameInfo.current_round_details.selected_potion
 	round_time = (GameInfo.MAX_TIME * selected_potion.potion_time_modification) / (1 + (((float)(GameInfo.round_num)) / 10))
 	$RoundTimer.start(round_time)

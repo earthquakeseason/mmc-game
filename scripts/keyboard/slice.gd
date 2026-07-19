@@ -5,4 +5,4 @@ func _ready() -> void:
 	$Ingredient.texture = GameInfo.get_current_ingredient().initial_state
 
 func _increment_mechanical_stage(_change_stage: bool) -> void:
-	pass
+	$SliceStreamPlayer.play()

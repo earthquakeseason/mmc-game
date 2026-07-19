@@ -27,13 +27,14 @@ func _ready() -> void:
 	# technically could be else as ideally it could never be anything else but you never know i guess
 	elif current_minigame == load("res://resources/mechanical/cutting.tres"):
 		var slice_instance: Node = SLICE.instantiate()
-		slice_instance.position.x = 150 
+		slice_instance.position.y = 50 
 		add_child(slice_instance)
 		
 	GameEvents.change_pause_state.connect(_on_pause_state_changed)
 	position = get_viewport().get_visible_rect().size / 2
 	first_key = true
 	get_new_key()
+	$InstructionLabel.visible = Settings.show_tutorials
 
 func _input(event) -> void:
 	if event is InputEventKey and not event.is_action_pressed("escape"):

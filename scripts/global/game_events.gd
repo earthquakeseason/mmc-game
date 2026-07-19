@@ -6,6 +6,7 @@ signal next_round
 signal round_transition
 signal increment_mechanical_stage
 signal change_pause_state
+signal setting_updated
 
 # debugger gets upset if i dont use it anywhere...
 func emit_submit_pressed() -> void:
@@ -27,3 +28,6 @@ func emit_increment_mechanical_stage(shrink: bool) -> void:
 func emit_change_pause_state(paused: bool) -> void:
 	change_pause_state.emit(paused)
 	GameInfo.game_paused = paused
+
+func emit_setting_updated() -> void:
+	setting_updated.emit()

@@ -120,4 +120,6 @@ scale = Vector2(6, 6)
 pivot_offset = Vector2(48, 60)
 texture = ExtResource("7_wi4c7")
 
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=883633721]
+
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

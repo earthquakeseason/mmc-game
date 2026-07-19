@@ -2,6 +2,7 @@ extends Node
 
 const PHYSICAL_KEYCODE_OPTIONS: Array[int] = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90]
 const MAX_TIME: int = 45
+const ROUND_COUNT: int = 7
 const VICTORY_SCREEN = preload("res://scenes/victory_screen.tscn")
 
 var round_num: int
@@ -75,13 +76,13 @@ func get_max_minigame_score(minigame_type: Minigame.MinigameTypes) -> Dictionary
 
 func increment_round() -> void:
 	round_num += 1
-	if round_num < 10:
+	if round_num < ROUND_COUNT:
 		ingredient_index = 0
 		ingredient_step_index = 0
 		total_ingredient_step = 0
 		bottled = false
 		round_over = false
-		if round_num != 9:
+		if round_num != ROUND_COUNT - 1:
 			# the filter is removing the current potion from selection so there aren't double ups
 			current_round_details.selected_potion = Potions.all_usable_potions.filter(func(potion: Potion): return potion != current_round_details.selected_potion).pick_random()
 		else:

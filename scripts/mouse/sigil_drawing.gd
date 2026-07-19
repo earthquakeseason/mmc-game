@@ -21,10 +21,12 @@ var point_index: int
 var path_star_postions: Array[Vector2]
 var stroke_brush: Image
 var drawing_brush: Image
+
 @onready var path_stars: Node2D = $"../PathStars"
 
 func _ready() -> void:
 	GameEvents.submit_pressed.connect(_on_submit_pressed)
+
 	set_blank_canvas()
 	position = get_viewport().get_visible_rect().size / 2
 	chosen_sigil = GameInfo.get_current_minigame()

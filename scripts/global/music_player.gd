@@ -1,0 +1,16 @@
+extends AudioStreamPlayer
+
+const BRAIN_EMPTY = preload("res://assets/music/brain_empty.wav")
+const TAPERED_OUT = preload("res://assets/music/tapered_out.wav")
+const SONG_OPTIONS: Array[AudioStreamWAV] = [BRAIN_EMPTY, TAPERED_OUT]
+
+func _ready() -> void:
+	GameEvents.setting_updated.connect(_on_settings_updated)
+	_on_finished()
+
+func _on_finished() -> void:
+	stream = SONG_OPTIONS.pick_random()
+	play()
+
+func _on_settings_updated() -> void:
+	volume_db = 0.0

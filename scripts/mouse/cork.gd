@@ -16,6 +16,7 @@ var time_elapsed: float = 0.0
 var stopwatch_stopped: bool = false
 
 signal display_stars
+signal place_cork
 
 func _ready() -> void:
 	# feels less harsh than CCD_MODE_CAST_SHAPE (and is supposedly faster), check up on this
@@ -78,6 +79,7 @@ func _input(event: InputEvent) -> void:
 func _on_potion_opening_body_entered(body: Node2D) -> void:
 	if body == self:
 		pending_lock = true
+		place_cork.emit()
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if pending_lock:
