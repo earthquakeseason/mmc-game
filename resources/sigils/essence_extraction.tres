@@ -8,5 +8,4 @@ script = ExtResource("1_h845f")
 match_threshold = 65.0
 icon = ExtResource("1_1g18b")
 minigame_type = 1
-minigame_name = "essence extraction"
 metadata/_custom_type_script = "uid://dthta0v0raq8p"

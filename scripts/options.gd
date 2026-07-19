@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal close_pause_pressed
+
 @onready var tutorial_button: CheckButton = $VBoxContainer/TutorialButton
 @onready var volume_slider: HSlider = $VBoxContainer/MusicVolumeContainer/VolumeSlider
 
@@ -27,8 +29,7 @@ func _on_back_button_pressed() -> void:
 	queue_free()
 
 func _on_close_button_pressed() -> void:
-	GameEvents.emit_change_pause_state(false)
-	queue_free()
+	close_pause_pressed.emit()
 
 func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:

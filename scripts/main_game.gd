@@ -28,22 +28,25 @@ func _ready() -> void:
 	GameEvents.change_pause_state.connect(_on_pause_state_changed)
 	
 	options_scene = OPTIONS.instantiate()
-	
+	options_scene.close_pause_pressed.connect(_change_pause_screen_state)
+
 	start_round()
 	start_turn()
 
 func _process(_delta: float) -> void:
 	$RoundTimeProgress.value = 100 * ($RoundTimer.time_left / round_time)
 
+func _change_pause_screen_state() -> void:
+	if GameInfo.game_paused:
+		GameEvents.emit_change_pause_state(false)
+		remove_child(options_scene)
+	else:
+		GameEvents.emit_change_pause_state(true)
+		add_child(options_scene)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
-		if GameInfo.game_paused:
-			GameEvents.emit_change_pause_state(false)
-			remove_child(options_scene)
-		else:
-			GameEvents.emit_change_pause_state(true)
-			add_child(options_scene)
-
+		_change_pause_screen_state()
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
 		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.DRAWING:

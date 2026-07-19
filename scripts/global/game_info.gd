@@ -17,6 +17,8 @@ var drawing_accuracy: int
 var cork_speed: float
 var game_paused: bool
 
+const SWIFTNESS = preload("res://resources/potions/swiftness.tres")
+
 func _ready() -> void:
 	reset_values()
 
@@ -25,7 +27,7 @@ func reset_values() -> void:
 	round_num = 0
 	ingredient_index = 0
 	ingredient_step_index = 0
-	current_round_details.selected_potion = Potions.all_usable_potions.pick_random()
+	current_round_details.selected_potion = SWIFTNESS
 	total_ingredient_step = 0
 	bottled = false
 	typing_accuracy = 0

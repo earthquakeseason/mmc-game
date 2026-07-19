@@ -5,23 +5,22 @@ const FLING_DISTANCE: float = 45.0
 # in radians
 const FLING_ROTATION: float = 0.45
 
+var cut: int = 0
+
 func _ready() -> void:
 	GameEvents.increment_mechanical_stage.connect(_increment_mechanical_stage)
 	$Ingredient.texture = GameInfo.get_current_ingredient().initial_state
 
 func _increment_mechanical_stage(_change_stage: bool) -> void:
 	$SliceStreamPlayer.play()
-	_slice_and_advance_stage()
+	slice_and_advance_stage()
 
-func _slice_and_advance_stage() -> void:
-	var sprite: Sprite2D = $Ingredient
-	# this is null on the transition to the next stage
-	if sprite == null:
-		return
-
+func slice_and_advance_stage() -> void:
 	create_slice_pieces()
-	sprite.visible = false
-	get_tree().create_timer(SLICE_DURATION + 0.05).timeout.connect(func(): sprite.visible = true)
+
+	$Ingredient.visible = false
+	# this is null on the transition to the next stage
+	get_tree().create_timer(SLICE_DURATION + 0.05).timeout.connect(func(): $Ingredient.visible = true)
 
 func create_slice_pieces() -> void:
 	var texture_size: Vector2 = $Ingredient.texture.get_size()
