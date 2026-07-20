@@ -71,6 +71,8 @@ func _on_next_round() -> void:
 	start_turn()
 
 func start_round() -> void:
+	GameInfo.get_new_options_index()
+	
 	demand_label.text = str(GameInfo.ROUND_COUNT - (GameInfo.round_num + 1)) + " potions left"
 	selected_potion = GameInfo.current_round_details.selected_potion
 	round_time = (GameInfo.MAX_TIME * selected_potion.potion_time_modification) / (1 + (((float)(GameInfo.round_num)) / 10))
@@ -85,14 +87,16 @@ func start_round() -> void:
 		next_up_h_box.remove_child(child)
 		child.queue_free()
 
+	var ingredient_count_index: int = 0
 	for ingredient: Ingredient in selected_potion.ingredients:
-		for minigame: Minigame in ingredient.preperation_minigames:
+		for minigame_options: MinigameOptions in ingredient.preperation_minigames:
 			var next_up_container: PanelContainer = PanelContainer.new()
-			if (minigame.minigame_type == Minigame.MinigameTypes.TYPING):
+			if minigame_options.minigames[GameInfo.round_ingredient_minigame_option_indexes[ingredient_count_index]].minigame_type == Minigame.MinigameTypes.TYPING:
 				next_up_container = create_next_up_container(KNIFE)
 			else:
 				next_up_container = create_next_up_container(DRAWING)
 			next_up_h_box.add_child(next_up_container)
+			ingredient_count_index += 1
 	next_up_h_box.add_child(create_next_up_container(POTION))
 
 func create_next_up_container(texture: Texture2D) -> PanelContainer:

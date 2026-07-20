@@ -1,15 +1,17 @@
 extends Sprite2D
 
 const NUM_POINTS: int = 32
+const NUM_GUIDE_STARS: int = 16
 const CANVAS_SIZE: int = 250
 const RECOGNIZER_SIZE: float = 250.0
 const STROKE_RADIUS: int = 5
 const DRAWING_RADIUS: int = 3
 const FAIL_SYMBOL: PackedScene = preload("uid://dawarawgixbne")
 const NOTE_ALT: CompressedTexture2D = preload("uid://b56qkovby3ft8")
-const STAR_PATH = preload("res://assets/symbols/star_path.png")
+const GUIDELINE_STAR: PackedScene = preload("res://scenes/guideline_star.tscn")
 const DRAWING_COLOR: Color = Color.WHITE
 const STROKE_COLOR: Color = Color("88009e")
+const STAR_ACTIVATION_RADIUS: float = 40.0
 
 var background_image: Image
 var canvas_texture: ImageTexture
@@ -21,13 +23,16 @@ var point_index: int
 var path_star_postions: Array[Vector2]
 var stroke_brush: Image
 var drawing_brush: Image
+var star_sprites: Array[Sprite2D]
+var star_head_index: int = -1
 
 @onready var path_stars: Node2D = $"../PathStars"
 
 signal drawn_on
 
 func _ready() -> void:
-	set_blank_canvas()
+	GameEvents.setting_updated.connect(_on_settings_updated)
+
 	position = get_viewport().get_visible_rect().size / 2
 	chosen_sigil = GameInfo.get_current_minigame()
 	normalised_template = normalize_points(chosen_sigil.point_cloud)
@@ -37,6 +42,41 @@ func _ready() -> void:
 	normalised_template_reverse = normalize_points(reversed)
 	stroke_brush = create_circle_brush(STROKE_RADIUS, STROKE_COLOR)
 	drawing_brush = create_circle_brush(DRAWING_RADIUS, DRAWING_COLOR)
+	for i: int in range(0, chosen_sigil.point_cloud.size(), 2):
+		var sprite: Sprite2D = GUIDELINE_STAR.instantiate()
+		sprite.position = chosen_sigil.point_cloud[i]
+		sprite.visible = false
+		path_stars.add_child(sprite)
+		star_sprites.append(sprite)
+	set_blank_canvas()
+
+func _on_settings_updated() -> void:
+	reset_guideline_progress()
+
+func reset_guideline_progress() -> void:
+	for sprite: Sprite2D in star_sprites:
+		sprite.visible = false
+	star_head_index = -1
+	if star_sprites.is_empty():
+		return
+	star_head_index = 0
+	update_guideline_visibility()
+
+func update_guideline_visibility() -> void:
+	if Settings.show_guidelines:
+		for i: int in range(star_sprites.size()):
+			if i <= star_head_index:
+				star_sprites[i].visible = true
+
+		if star_head_index >= 0 and star_head_index < star_sprites.size():
+			star_sprites[star_head_index].star_spawn()
+
+func check_guideline_progress(mouse_screen_pos: Vector2) -> void:
+	if star_head_index + 1 >= star_sprites.size():
+		return
+	if path_stars.to_local(mouse_screen_pos).distance_to(star_sprites[star_head_index + 1].position) <= STAR_ACTIVATION_RADIUS:
+		star_head_index += 1
+		update_guideline_visibility()
 
 # should hopefully make drawing the circle less laggy... (todo: check this later)
 func create_circle_brush(radius: int, color: Color) -> Image:
@@ -80,6 +120,8 @@ func _input(event: InputEvent) -> void:
 			var impos: Vector2 = pos + get_rect().size / 2.0
 			paint_texture(impos)
 			canvas_texture.update(background_image)
+			if Settings.show_guidelines:
+				check_guideline_progress(event.position)
 			if event.relative.length_squared() > 0:
 				var num: int = ceili(event.relative.length())
 				var target_pos: Vector2 = impos - (event.relative)
@@ -87,9 +129,6 @@ func _input(event: InputEvent) -> void:
 					impos = impos.move_toward(target_pos, 1)
 					paint_texture(impos)
 					gesture_points.append(impos)
-			#for point in range(path_star_postions):
-				#if get_global_mouse_position().distance_to(path_star_postions[point]) < 1.0:
-					#path_stars.get_child(point)
 
 func _on_submit_button_pressed() -> void:
 	if recognizable():
@@ -207,3 +246,4 @@ func set_blank_canvas() -> void:
 	background_image = NOTE_ALT.get_image()
 	canvas_texture = ImageTexture.create_from_image(background_image)
 	texture = canvas_texture
+	reset_guideline_progress()

@@ -3,12 +3,23 @@
 [ext_resource type="Texture2D" uid="uid://cy274owilruqp" path="res://assets/ingredients/flaming_spirit.png" id="1_2dols"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_htrwx"]
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_w4v85"]
+[ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_jdwj7"]
 [ext_resource type="Resource" uid="uid://b4o6p3lyv638g" path="res://resources/sigils/frost.tres" id="2_xaov1"]
-[ext_resource type="Resource" uid="uid://doaqteuomv4ko" path="res://resources/sigils/essence_extraction.tres" id="3_2dols"]
+[ext_resource type="Resource" uid="uid://babiiayer8jn5" path="res://resources/mechanical/crushing.tres" id="5_vm2kh"]
+
+[sub_resource type="Resource" id="Resource_72hko"]
+script = ExtResource("2_jdwj7")
+minigames = Array[ExtResource("1_w4v85")]([ExtResource("2_xaov1")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
+
+[sub_resource type="Resource" id="Resource_um3ot"]
+script = ExtResource("2_jdwj7")
+minigames = Array[ExtResource("1_w4v85")]([ExtResource("5_vm2kh")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [resource]
 script = ExtResource("1_htrwx")
 name = "Flaming Spirit"
-preperation_minigames = Array[ExtResource("1_w4v85")]([ExtResource("2_xaov1"), ExtResource("3_2dols")])
+preperation_minigames = Array[ExtResource("2_jdwj7")]([SubResource("Resource_72hko"), SubResource("Resource_um3ot")])
 initial_state = ExtResource("1_2dols")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"

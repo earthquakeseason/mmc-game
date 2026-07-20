@@ -9,6 +9,7 @@ var round_num: int
 var current_round_details: Round
 var round_over: bool
 var ingredient_index: int
+var round_ingredient_minigame_option_indexes: Array[int]
 var ingredient_step_index: int
 var total_ingredient_step: int
 var bottled: bool
@@ -16,8 +17,6 @@ var typing_accuracy: int
 var drawing_accuracy: int
 var cork_speed: float
 var game_paused: bool
-
-const SWIFTNESS = preload("res://resources/potions/swiftness.tres")
 
 func _ready() -> void:
 	reset_values()
@@ -27,7 +26,7 @@ func reset_values() -> void:
 	round_num = 0
 	ingredient_index = 0
 	ingredient_step_index = 0
-	current_round_details.selected_potion = SWIFTNESS
+	current_round_details.selected_potion = Potions.all_usable_potions.pick_random()
 	total_ingredient_step = 0
 	bottled = false
 	typing_accuracy = 0
@@ -52,6 +51,14 @@ func increment_turn() -> void:
 		return
 	round_over = true
 
+## should be run every round
+func get_new_options_index() -> void:
+	round_ingredient_minigame_option_indexes.clear()
+	
+	for ingredient: Ingredient in current_round_details.selected_potion.ingredients:
+		for minigame_options: MinigameOptions in ingredient.preperation_minigames:
+			round_ingredient_minigame_option_indexes.append(randi_range(0, minigame_options.minigames.size() - 1))
+
 ## gets total number of minigames
 func get_total_minigames() -> int:
 	var total: int = 0
@@ -63,14 +70,16 @@ func get_total_minigames() -> int:
 ## this WONT work for bottling as its score is calculated with time
 func get_max_minigame_score(minigame_type: Minigame.MinigameTypes) -> Dictionary[String, Variant]:
 	var score: int = 0
+	var ingredient_count_index: int = 0
 	
 	if minigame_type == Minigame.MinigameTypes.BOTTLING:
 		return {"score": 0, "valid": false}
 
 	for ingredient: Ingredient in current_round_details.selected_potion.ingredients:
-		for preperation_minigame: Minigame in ingredient.preperation_minigames:
-			if preperation_minigame.minigame_type == minigame_type:
-				score += 1
+		for minigame_options: MinigameOptions in ingredient.preperation_minigames:
+			if minigame_options.minigames[round_ingredient_minigame_option_indexes[ingredient_count_index]].minigame_type == minigame_type:
+					score += 1
+			ingredient_count_index += 1
 
 	if score == 0:
 		return {"score": 0, "valid": false}
@@ -99,7 +108,7 @@ func get_current_minigame() -> Minigame:
 		var bottling_minigame: Minigame = Minigame.new()
 		bottling_minigame.minigame_type = Minigame.MinigameTypes.BOTTLING
 		return bottling_minigame
-	return current_round_details.selected_potion.ingredients[ingredient_index].preperation_minigames[ingredient_step_index]
+	return current_round_details.selected_potion.ingredients[ingredient_index].preperation_minigames[ingredient_step_index].minigames[round_ingredient_minigame_option_indexes[total_ingredient_step]]
 
 func update_time_left(current_time: float) -> void:
 	current_round_details.time = current_time

@@ -4,10 +4,16 @@
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_acqma"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="1_ohkbg"]
 [ext_resource type="Texture2D" uid="uid://cn7sdi64e6x8d" path="res://assets/ingredients/grimy_toadflax.png" id="1_q6ceq"]
+[ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_ce4ud"]
+
+[sub_resource type="Resource" id="Resource_r0cw4"]
+script = ExtResource("2_ce4ud")
+minigames = Array[ExtResource("1_acqma")]([ExtResource("1_71bae")])
+metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [resource]
 script = ExtResource("1_ohkbg")
 name = "Grimy Toadflax"
-preperation_minigames = Array[ExtResource("1_acqma")]([ExtResource("1_71bae")])
+preperation_minigames = Array[ExtResource("2_ce4ud")]([SubResource("Resource_r0cw4")])
 initial_state = ExtResource("1_q6ceq")
 metadata/_custom_type_script = "uid://b6fm5nes3hrhy"
