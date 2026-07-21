@@ -65,13 +65,16 @@ func score_gain(time_left: float) -> int:
 	var result_label = PRESS_RESULT_LABEL.instantiate()
 	add_child(result_label)
 
-	if time_left > (0.5 / 2) * key_time  && time_left <= (0.9 / 2) * key_time:
+	if time_left <= (0.5 / 2) * key_time:
+		result_label.show_result("Miss")
+		return 0
+	elif time_left <= (0.9 / 2) * key_time:
 		result_label.show_result("Close")
 		return 10
-	elif time_left > (0.9 / 2) * key_time && time_left <= (1.1 / 2) * key_time:
+	elif time_left <= (1.1 / 2) * key_time:
 		result_label.show_result("Fine")
 		return 100
-	elif time_left > (1.1 / 2) * key_time && time_left <= (1.5 / 2) * key_time:
+	elif time_left <= (1.5 / 2) * key_time:
 		result_label.show_result("Good")
 		return 150
 	else:

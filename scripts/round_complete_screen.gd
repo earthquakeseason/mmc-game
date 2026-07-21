@@ -41,7 +41,7 @@ func _ready() -> void:
 
 	# these vlaues are kind of wack, especirally the time_score and drawing_score, probably modify calculations later
 	current_time_modified = (GameInfo.current_round_details.time / GameInfo.current_round_details.selected_potion.potion_time_modification) * ((1 + ((float)(GameInfo.round_num)) / 10) / 1.5)
-	time_score = round((current_time_modified / GameInfo.MAX_TIME) * PER_SCORE_TIME_VALUE)
+	time_score = round(pow(clamp(current_time_modified / GameInfo.MAX_TIME, 0.0, 1.0), 0.5) * PER_SCORE_TIME_VALUE)
 	typing_score = round(clampf(float(GameInfo.typing_accuracy) / max_typing_score.get("score"), SCORE_LOWER_BOUND, 1.0) * PER_SCORE_VALUE)
 	drawing_score = round(clampf(float(GameInfo.drawing_accuracy) / max_drawing_score.get("score"), SCORE_LOWER_BOUND, 1.0) * PER_SCORE_VALUE)
 	corking_score = round(PER_SCORE_VALUE - clampf(GameInfo.cork_speed, 0.0, 10.0) * 20)

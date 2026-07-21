@@ -67,8 +67,10 @@ func _on_complete_attempt(successful: bool) -> void:
 func _on_next_round() -> void:
 	game_scene.queue_free()
 	GameInfo.increment_round()
-	start_round()
-	start_turn()
+	# to avoid an error with start_round attempting to use a now non-existent timer
+	if GameInfo.round_num < GameInfo.ROUND_COUNT:
+		start_round()
+		start_turn()
 
 func start_round() -> void:
 	GameInfo.get_new_options_index()
