@@ -5,11 +5,12 @@
 [ext_resource type="Script" uid="uid://dd1va8khh8h5n" path="res://scripts/minigame_base.gd" id="1_w4v85"]
 [ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_jdwj7"]
 [ext_resource type="Resource" uid="uid://b4o6p3lyv638g" path="res://resources/sigils/frost.tres" id="2_xaov1"]
+[ext_resource type="Resource" uid="uid://cdsuhn0poh6r4" path="res://resources/sigils/frost-alt.tres" id="5_v0wx8"]
 [ext_resource type="Resource" uid="uid://babiiayer8jn5" path="res://resources/mechanical/crushing.tres" id="5_vm2kh"]
 
 [sub_resource type="Resource" id="Resource_72hko"]
 script = ExtResource("2_jdwj7")
-minigames = Array[ExtResource("1_w4v85")]([ExtResource("2_xaov1")])
+minigames = Array[ExtResource("1_w4v85")]([ExtResource("2_xaov1"), ExtResource("5_v0wx8")])
 metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [sub_resource type="Resource" id="Resource_um3ot"]

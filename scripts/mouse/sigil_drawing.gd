@@ -12,6 +12,10 @@ const GUIDELINE_STAR: PackedScene = preload("res://scenes/guideline_star.tscn")
 const DRAWING_COLOR: Color = Color.WHITE
 const STROKE_COLOR: Color = Color("88009e")
 const STAR_ACTIVATION_RADIUS: float = 40.0
+const FIRE_ALT_1 = preload("res://assets/sigils/fire-alt-1.png")
+const FIRE_ALT_2 = preload("res://assets/sigils/fire-alt-2.png")
+const FROST_ALT = preload("res://assets/sigils/frost-alt.png")
+const JUICING_ALT = preload("res://assets/sigils/juicing-alt.png")
 
 var background_image: Image
 var canvas_texture: ImageTexture
@@ -154,6 +158,8 @@ func recognizable() -> bool:
 
 func normalize_points(points: Array[Vector2]) -> Array[Vector2]:
 	var resampled = resample(points)
+	# uncomment when adding new point clouds
+	print(resampled)
 	var rotated = rotate_to_zero(resampled)
 	var scaled = scale_to(rotated, RECOGNIZER_SIZE)
 	var centered_points  = translate_to_origin(scaled)

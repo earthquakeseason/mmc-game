@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://y8n2nyt1bxe0" path="res://resources/sigils/juicing.tres" id="2_utb4p"]
 [ext_resource type="Script" uid="uid://b6fm5nes3hrhy" path="res://scripts/ingredients/ingredient_base.gd" id="2_xb1b4"]
 [ext_resource type="Resource" uid="uid://nq24dp6nlk3e" path="res://resources/mechanical/cutting.tres" id="3_na1xn"]
+[ext_resource type="Resource" uid="uid://dbasu3qu6uwlr" path="res://resources/sigils/juicing-alt.tres" id="6_itcxy"]
 
 [sub_resource type="Resource" id="Resource_37xxi"]
 script = ExtResource("2_upau1")
@@ -14,7 +15,7 @@ metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [sub_resource type="Resource" id="Resource_7wctj"]
 script = ExtResource("2_upau1")
-minigames = Array[ExtResource("1_l4ea5")]([ExtResource("2_utb4p")])
+minigames = Array[ExtResource("1_l4ea5")]([ExtResource("2_utb4p"), ExtResource("6_itcxy")])
 metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [resource]

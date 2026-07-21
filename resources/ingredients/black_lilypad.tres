@@ -6,11 +6,13 @@
 [ext_resource type="Script" uid="uid://eh3ixbgnbno1" path="res://scripts/minigame_options.gd" id="2_kuosk"]
 [ext_resource type="Resource" uid="uid://b6qfm86a2yj1e" path="res://resources/sigils/flame.tres" id="4_8ptry"]
 [ext_resource type="Resource" uid="uid://nq24dp6nlk3e" path="res://resources/mechanical/cutting.tres" id="5_hcu21"]
+[ext_resource type="Resource" uid="uid://73kj1n5ibfny" path="res://resources/sigils/flame-alt-1.tres" id="5_u7lr5"]
+[ext_resource type="Resource" uid="uid://3q4dy66kaaqh" path="res://resources/sigils/flame-alt-2.tres" id="6_axcc5"]
 [ext_resource type="Resource" uid="uid://doaqteuomv4ko" path="res://resources/sigils/essence_extraction.tres" id="6_u7lr5"]
 
 [sub_resource type="Resource" id="Resource_ql6qh"]
 script = ExtResource("2_kuosk")
-minigames = Array[ExtResource("1_wllvt")]([ExtResource("4_8ptry")])
+minigames = Array[ExtResource("1_wllvt")]([ExtResource("4_8ptry"), ExtResource("5_u7lr5"), ExtResource("6_axcc5")])
 metadata/_custom_type_script = "uid://eh3ixbgnbno1"
 
 [sub_resource type="Resource" id="Resource_axcc5"]
