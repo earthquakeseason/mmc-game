@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var cork_sprite: Sprite2D = $Cork/CorkSprite
 @onready var potion_liquid: Sprite2D = $Potion/PotionLiquid
+@onready var cork: RigidBody2D = $Cork
 
 func _ready() -> void:
 	GameEvents.round_transition.connect(_on_round_transition)

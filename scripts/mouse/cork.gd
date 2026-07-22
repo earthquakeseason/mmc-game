@@ -15,7 +15,6 @@ var final_lock: bool = false
 var time_elapsed: float = 0.0
 var stopwatch_stopped: bool = false
 
-signal display_stars
 signal place_cork
 
 func _ready() -> void:
@@ -76,7 +75,7 @@ func _input(event: InputEvent) -> void:
 		if freeze and event.double_click and not final_lock:
 			final_lock = true
 			target_position = Vector2(position.x, position.y + 20)
-			display_stars.emit()
+			GameEvents.emit_display_stars()
 			stopwatch_stopped = true
 			GameInfo.cork_speed = time_elapsed
 			await get_tree().create_timer(1.0).timeout

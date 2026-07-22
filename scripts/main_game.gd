@@ -26,6 +26,7 @@ func _ready() -> void:
 	GameEvents.complete_attempt.connect(_on_complete_attempt)
 	GameEvents.next_round.connect(_on_next_round)
 	GameEvents.change_pause_state.connect(_on_pause_state_changed)
+	GameEvents.display_stars.connect(_on_stars_particles_displayed)
 	
 	options_scene = OPTIONS.instantiate()
 	options_scene.close_pause_pressed.connect(_change_pause_screen_state)
@@ -47,18 +48,19 @@ func _change_pause_screen_state() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("escape"):
 		_change_pause_screen_state()
+
 func _on_complete_attempt(successful: bool) -> void:
 	if successful:
-		if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.DRAWING:
-			$SFXPlayer.stream = PAGE_TURN
-			$SFXPlayer.play()
-		GameInfo.increment_turn()
-		GameInfo.update_time_left($RoundTimer.time_left)
 		if GameInfo.round_over:
 			round_complete_scene = ROUND_COMPLETE_SCREEN.instantiate()
 			await get_tree().process_frame
 			add_child(round_complete_scene)
 		else:
+			if GameInfo.get_current_minigame().minigame_type == Minigame.MinigameTypes.DRAWING:
+				$SFXPlayer.stream = PAGE_TURN
+				$SFXPlayer.play()
+			GameInfo.increment_turn()
+			GameInfo.update_time_left($RoundTimer.time_left)
 			# remove previous scene
 			game_scene.queue_free()
 			start_turn()
@@ -128,7 +130,6 @@ func start_turn() -> void:
 
 		Minigame.MinigameTypes.BOTTLING:
 			game_scene = POTION_BOTTLING.instantiate()
-			game_scene.display_stars.connect(_on_stars_particles_displayed)
 			change_table_dim_state(false)
 			text = "Bottle!"
 
@@ -146,6 +147,8 @@ func start_turn() -> void:
 # so the timer the is stopped the moment the round is (actually) over
 func _on_stars_particles_displayed() -> void:
 	$RoundTimer.paused = true
+	GameInfo.increment_turn()
+	GameInfo.update_time_left($RoundTimer.time_left)
 
 func _on_round_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/lose_screen.tscn")

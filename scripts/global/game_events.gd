@@ -6,6 +6,7 @@ signal round_transition
 signal increment_mechanical_stage
 signal change_pause_state
 signal setting_updated
+signal display_stars
 
 func emit_minigame_complete_attempt(successful: bool) -> void:
 	complete_attempt.emit(successful)
@@ -26,3 +27,7 @@ func emit_change_pause_state(paused: bool) -> void:
 
 func emit_setting_updated() -> void:
 	setting_updated.emit()
+
+## ran when the functional part of the round is completed and only animation is left
+func emit_display_stars() -> void:
+	display_stars.emit()

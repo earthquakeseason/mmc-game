@@ -198,7 +198,6 @@ text = "Drag the cork into the potion's slot rightside up."
 horizontal_alignment = 1
 
 [connection signal="body_entered" from="Potion/PotionOpening" to="Cork" method="_on_potion_opening_body_entered"]
-[connection signal="display_stars" from="Cork" to="StarParticles2D" method="_on_cork_display_stars"]
 [connection signal="mouse_entered" from="Cork" to="Cork" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Cork" to="Cork" method="_on_mouse_exited"]
 [connection signal="place_cork" from="Cork" to="." method="_on_place_cork"]
